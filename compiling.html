@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ Compiling</title>
+<link href="styles.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+function hide( id ) {
+	document.getElementById( id ).style.display = 'none';
+}
+function show( id ) {
+	var buttonID = ('button_' + id);
+	document.getElementById( id ).style.display = '';
+	for ( i=0; i<document.getElementsByTagName( 'input' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'input' )[i].id != buttonID ) {
+			document.getElementsByTagName( 'input' )[i].style.fontWeight = 'normal';
+		}
+	}
+	document.getElementById( buttonID ).style.fontWeight = 'bold';
+}
+</script>
+</head>
+<body onload="init_bar();">
+<h1>Compiling</h1>
+
+<hr />
+
+<div id="pagewrap">
+	<div align="center">
+		<input id="button_win" type="button" onClick="show( 'win' ); hide( 'linux' )" class="button" value="Windows" />
+		<input id="button_linux" type="button" onClick="hide( 'win' ); show( 'linux' )" class="button" value="Linux" />
+	</div>
+
+	<div id="win" style="display:none;">
+		<ol>
+			<li>Download and install <em>Visual Studio 2013 Community Edition</em>: <a href="http://www.visualstudio.com/">vs_community.exe</a> (untick optional components)</li>
+			<li>Download Python 2.7: <a href="https://www.python.org/ftp/python/2.7.8/python-2.7.8.msi">python-2.7.8.msi</a> (Enable <em>Install python.exe to Path</em>)</li>
+			<li>Download PyWin32 Extensions: <a href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download">pywin32-219.win32-py2.7.exe</a></li>
+			<li>Download SCons: <a href="http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-setup.exe/download">scons-2.3.4-setup.exe</a></li>
+			<li>Add <span class="code">C:\Python27</span> and <span class="code">C:\Python27\Scripts</span> to your <span class="code">%PATH%</span> environment variable.</li>
+			<li>Download the JA++ code and unzip it: <a href="https://github.com/Razish/japp/archive/master.zip">japp_master.zip</a></li>
+			<li>Open the solution file: <span class="code">japp_master/japp.sln</span></li>
+			<li>Select <em>Release</em> configuration (<a href="https://dl.dropboxusercontent.com/u/41352148/how2release.png">picture</a>)</li>
+			<li>Press F7 (Build Solution) to compile</li>
+			<li>Copy files from <span class="code">japp_master/*.dll</span> to <span class="code">GameData/japlus/*.dll</span>, zip them up and rename to <span class="code">cl_bins_win32.pk3</span></li>
+		</ol>
+	</div>
+
+	<div id="linux" style="display:none;">
+		<ol>
+			<li>Install tools and dependencies<br />
+			<div class="term">$ sudo apt-get install git scons gcc libreadline-dev</div></li>
+			<li>Download the repository<br />
+			<div class="term">$ git clone https://github.com/Razish/japp.git
+$ cd japp</div></li>
+			<li>Compile and copy files to JA installation<br />
+			<div class="term">$ scons
+$ cp ./*.so /path/to/jka/japlus/</div></li>
+			<li>If you want to share these files, you can automatically package them using the Lua script<br />
+			<div class="term">$ sudo apt-get install lua5.2 lua-filesystem p7zip-full
+$ lua package.lua</div><br />
+		This will produce two <span class="code">.zip</span> files containing the binaries.</li>
+		</ol>
+		<hr />
+		There are other options you can specify as arguments to <span class="code">scons</span>
+		<ul>
+			<li><span class="code">force32</span> 1 to build a 32-bit binary on a 64-bit machine</li>
+			<li><span class="code">debug</span> 1 to generate debug information, 2 to also optimise code</li>
+		</ul>
+		<hr />
+		Or the following environment variables:
+		<ul>
+			<li><span class="code">NO_SSE=1</span> to not generate SSE2 instructions - closer to basejka. This is used for official builds</li>
+			<li><span class="code">MORE_WARNINGS=1</span> to enable more compiler warnings</li>
+		</ul>
+	</div>
+</div>
+
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

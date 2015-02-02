@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ - Cvars</title>
+<link href="styles.css" rel="stylesheet" />
+</head>
+<body onload="init_bar();">
+<h1>Cvars</h1>
+
+<hr />
+
+<script type="text/javascript">
+const serverCvars = [
+	{ n:"bot_addDelay", v:"3", d:"How many seconds to wait before adding bots until bot_minPlayers is reached" },
+	{ n:"bot_maxbots", v:"0", d:"Never exceed this amount of bots regardless of bot_minPlayers setting" },
+	{ n:"g_allowVote", v:"-1", d:"Allow players to callvote these options (bit-value)" },
+	{ n:"g_debugTrace", v:"0", d:"Visualise unlagged traces" },
+	{ n:"g_forceClientUpdateRate", v:"250", d:"Force a client update if a movement command is not received within x milliseconds" },
+	{ n:"g_forceRegenTimeDuel", v:"200", d:"Force regeneration rate whilst in a private duel" },
+	{ n:"g_jplua", v:"1", d:"Enable JPLua plugins" },
+	{ n:"g_logAdmin", v:"1", d:"Log admin events to file" },
+	{ n:"g_logClientInfo", v:"0", d:"Log client information changes to file" },
+	{ n:"g_logConsole", v:"1", d:"Log game console to file" },
+	{ n:"g_logFormat", v:"1", d:"Format of timestamp on log files" },
+	{ n:"g_logItemPickup", v:"1", d:"Avoid console spam when items are picked up" },
+	{ n:"g_logSecurity", v:"1", d:"Log security related events to file" },
+	{ n:"g_privateDuel", v:"23", d:"Which options to enable for private dueling (bit-value)" },
+	{ n:"g_privateDuelHealth", v:"100", d:"How much health players start with in a private duel" },
+	{ n:"g_privateDuelShield", v:"100", d:"How much shield players start with in a private duel" },
+	{ n:"japp_accurateMuzzle", v:"0", d:"Use sub-unit muzzle positions" },
+	{ n:"japp_allowBusyAttack", v:"1", d:"Allow saber attacks when player is \"busy\" in another animation" },
+	{ n:"japp_allowButterfly", v:"1", d:"Allow dual/staff butterfly attack" },
+	{ n:"japp_allowDFA", v:"1", d:"Allow DFA attack" },
+	{ n:"japp_allowEmotes", v:"1", d:"Allow emotes in these gametypes (bit-value)" },
+	{ n:"japp_allowFallSuicide", v:"1", d:"Allow /kill when falling to death" },
+	{ n:"japp_allowFlagDrop", v:"0", d:"Allow \"/drop flag\" in CTF" },
+	{ n:"japp_allowFlagPull", v:"0", d:"Allow force push/pull to affect dropped flags in CTF - INCOMPLETE" },
+	{ n:"japp_allowForceCombo", v:"0", d:"Allow comboing force absorb + protect" },
+	{ n:"japp_allowHook", v:"0", d:"Allow grapple hook in these gametypes (bit-value)" },
+	{ n:"japp_allowJetpack", v:"0", d:"Allow jetpack in these gametypes (bit-value)" },
+	{ n:"japp_allowKata", v:"1", d:"Allow kata attacks" },
+	{ n:"japp_allowLedgeGrab", v:"0", d:"Allow ledge grab" },
+	{ n:"japp_allowPushPullKnockdown", v:"1", d:"Allow pushing/pulling knocked down clients" },
+	{ n:"japp_allowSaberSwitch", v:"0", d:"Allow \"/saber saber1 saber2\" in these gametypes (bit-value)" },
+	{ n:"japp_allowSPCartwheel", v:"1", d:"Allow SP style cartwheel" },
+	{ n:"japp_allowStab", v:"1", d:"Allow backstab/rollstab attacks" },
+	{ n:"japp_allowToggleSpecialAttacks", v:"0", d:"Allow clients to disable certain special saber attacks for themselves" },
+	{ n:"japp_allowVoiceChat", v:"960", d:"Bit-value of gametypes to allow voice chat" },
+	{ n:"japp_allowWeaponDrop", v:"0", d:"Allow \"/drop weapon\"" },
+	{ n:"japp_allowWeaponPull", v:"1", d:"Allow weapons to be pulled out of enemy's hands" },
+	{ n:"japp_alwaysSpawnPowerups", v:"0", d:"Always spawn powerups to make map modding easier" },
+	{ n:"japp_ammapAnyGametype", v:"0", d:"Allow switching map to ones not supported by the current gametype" },
+	{ n:"japp_antiFakePlayer", v:"1", d:"Enable fake client detection (q3fill)" },
+	{ n:"japp_antiUserinfoFlood", v:"1", d:"Rate limiting for userinfo changes" },
+	{ n:"japp_charRestrictRGB", v:"1", d:"Disallow char_color_*** values below 100" },
+	{ n:"japp_chatProtection", v:"0", d:"Enable/disable protection when someone is chatting (chat god)" },
+	{ n:"japp_crashHandler", v:"1", d:"Enable crash logging" },
+	{ n:"japp_damageNotifications", v:"0", d:"Show a notification for how much damage is dealt" },
+	{ n:"japp_duelStats", v:"0", d:"Show the health/armor remaining, duration and number of hits at the end of a duel" },
+	{ n:"japp_empowerDrain", v:"1", d:"Drain force points when amempowered" },
+	{ n:"japp_fallToDeathInstant", v:"0", d:"Instantly respawn when falling in a pit" },
+	{ n:"japp_fixWeaponCharge", v:"1", d:"Fix being able to infinitely charge weapons by holding \"use item\" button" },
+	{ n:"japp_flipKick", v:"0", d:"Enable JK2 style flipkick" },
+	{ n:"japp_flipKickDamage", v:"20", d:"Damage dealt by flipkicks" },
+	{ n:"japp_flipKickKnockdown", v:"1", d:"Allow flipkicks to knock players down" },
+	{ n:"japp_forceLightningDamage", v:"1", d:"How much damage force lightning deals" },
+	{ n:"japp_gripHolsterSaber", v:"0", d:"Automatically holster saber when being gripped" },
+	{ n:"japp_hookSpeed", v:"800", d:"Speed of the grapple hook projectile" },
+	{ n:"japp_improveYellowDFA", v:"0", d:"JK2 style yellow DFA: don't spin around, don't jump as far" },
+	{ n:"japp_instagib", v:"0", d:"Instantly kill players with any weapon" },
+	{ n:"japp_itemDropStyle", v:"1", d:"Drop or throw items" },
+	{ n:"japp_maxConnPerIP", v:"3", d:"Maximum number of connections per IP at any time" },
+	{ n:"japp_mercInfiniteAmmo", v:"1", d:"Give infinite ammo to ammerc'd players" },
+	{ n:"japp_passRankConflicts", v:"1", d:"Don't allow lower-ranking admins to execute commands on higher-ranking admins" },
+	{ n:"japp_pauseTime", v:"120", d:"How long to pause the match for if voted" },
+	{ n:"japp_promode", v:"0", d:"Enable/disable CPM physics" },
+	{ n:"japp_randFix", v:"1", d:"Affects randomness of projectile deflection on windows/linux. 0=basejka, 1=fixed, 2=broken" },
+	{ n:"japp_readyThreshold", v:"0.5", d:"Fraction of players required to \"ready up\" before match starts" },
+	{ n:"japp_removeOldMines", v:"1", d:"Only allow 10 trip mines to be placed at any given time" },
+	{ n:"japp_saberBlockChanceMax", v:"0.75", d:"Maximum chance of saber blocking" },
+	{ n:"japp_saberBlockChanceMin", v:"0.0", d:"Minimum chance of saber blocking" },
+	{ n:"japp_saberBlockChanceScale", v:"0.5", d:"Minimum chance of saber blocking" },
+	{ n:"japp_saberBlockStanceParity", v:"3.0", d:"Difference between block rate of each stance" },
+	{ n:"japp_saberIdleDamage", v:"0", d:"Deal a small amount of damage when saber is idle" },
+	{ n:"japp_saberTweaks", v:"0", d:"Bit-value of different saber system tweaks." },
+	{ n:"japp_scorePlums", v:"0", d:"Show a floating number in the world when you score a point" },
+	{ n:"japp_scoreUpdateRate", v:"1000", d:"Only send scoreboard updates this frequently" },
+	{ n:"japp_shootFromEye", v:"0", d:"All weapons are accurate to the center of the screen, not offset by muzzle" },
+	{ n:"japp_showLaggingClients", v:"1", d:"Show an icon above the heads of lagging players" },
+	{ n:"japp_slapDistance", v:"50.0", d:"How far players move when amslap is used on them" },
+	{ n:"japp_slideOnHead", v:"1", d:"Slide on players' heads like basejka" },
+	{ n:"japp_spawnActivateSaber", v:"1", d:"Activate saber on player spawn" },
+	{ n:"japp_spawnWeaps", v:"28", d:"Choose which weapons to spawn with (bit-value)" },
+	{ n:"japp_speedCaps", v:"0", d:"Enable showing flag capture times in CTF" },
+	{ n:"japp_suicideDropFlag", v:"0", d:"Drop flag when you /kill rather than respawning the flag" },
+	{ n:"japp_teleportBits", v:"0", d:"Bit flag of player teleportation behaviour, such as retaining view angles, slick movement, teleporter effects" },
+	{ n:"japp_unlagged", v:"1", d:"Enable ping compensation for hitscan weapons such as disruptor, concussion alt-fire" },
+	{ n:"japp_unpauseTime", v:"5", d:"How long to count down when match is unpaused" },
+	{ n:"japp_userinfoValidate", v:"805306367", d:"Bit flag of userinfo fields to validate" },
+	{ n:"japp_voteDelay", v:"3000", d:"How long until a vote is excecuted after it passes" },
+	{ n:"japp_vq3physics", v:"0", d:"Enable Quake 3 physics" },
+	{ n:"japp_weaponPickupAlways", v:"0", d:"Allow picking up a weapon if you already have it (Gives ammo)" },
+	{ n:"japp_weaponRoll", v:"0", d:"Allow rolling with any weapon" },
+	{ n:"jp_cinfo", v:"0", d:"Various game settings (used internally)" },
+	{ n:"jp_gripSpeedScale", v:"0.4", d:"How fast players move when using force grip" },
+	{ n:"pmove_float", v:"0", d:"Framerate-independent physics (Requires a client mod that supports it)" },
+	{ n:"pmove_overbounce", v:"1", d:"Minor physics glitch" },
+	{ n:"v", v:"2.6B1", d:"Imitate JA+ version" }
+];
+
+const clientCvars = [
+	{ n:"cg_accelerometer", v:"0", d:"Show whether you are accelerating or slowing down" },
+	{ n:"cg_accelerometerPos", v:"320 360", d:"Position of the accelerometer" },
+	{ n:"cg_accelerometerSize", v:"128 20", d:"Size of the accelerometer" },
+	{ n:"cg_altDimA", v:"96", d:"Adjust the transparency of players not in the same dimension as you" },
+	{ n:"cg_attemptGhostPredict", v:"1", d:"Attempt to predict if you're ghosted and can walk smoothly through people" },
+	{ n:"cg_autoRecordDemo", v:"0", d:"Automatically record a demo at the start of each round" },
+	{ n:"cg_bubbleColour", v:"0 255 0 100", d:"Set the colour of the invulnerability bubble" },
+	{ n:"cg_chatboxBackground", v:"0.0 0.0 0.0 0.0", d:"Set the colour of the chatbox background" },
+	{ n:"cg_chatboxCompletion", v:"1", d:"Enable tab-completion for names in the chatbox" },
+	{ n:"cg_chatboxFont", v:"5", d:"Font to use for the chatbox" },
+	{ n:"cg_chatboxLineCount", v:"7", d:"How many lines to show in the chatbox before you have to scroll" },
+	{ n:"cg_chatboxLineHeight", v:"12", d:"Control the spacing between lines in the chatbox" },
+	{ n:"cg_chatboxPos", v:"112 375", d:"Set the position of the chatbox" },
+	{ n:"cg_chatboxSize", v:"0.5 497", d:"Set the text size and width of the chatbox" },
+	{ n:"cg_chatboxTabs", v:"0", d:"Enable use of tabs on the chatbox" },
+	{ n:"cg_chatboxTimeColour", v:"5", d:"Set the colour of the chatbox timestamp" },
+	{ n:"cg_chatboxTimeShow", v:"1", d:"Timestamp messages in the chatbox" },
+	{ n:"cg_crosshairColour", v:"255 255 255 255", d:"Colour of your crosshair" },
+	{ n:"cg_crosshairLerp", v:"0", d:"Interpolate dynamic crosshair" },
+	{ n:"cg_crosshairTint", v:"1", d:"Tint crosshair when looking at different entities" },
+	{ n:"cg_drawRewards", v:"0", d:"Show Quake 3 style rewards" },
+	{ n:"cg_drawScreenTints", v:"1", d:"Tint screen when in water/lava/slime, have ysalamiri, using force protect/absorb, etc" },
+	{ n:"cg_drawSpectatorNames", v:"0", d:"Draw names of all players when spectating" },
+	{ n:"cg_duelColour", v:"72 72 224 128 0", d:"Colour of the duel effect + force alpha" },
+	{ n:"cg_duelShaderStyle", v:"4", d:"Shader to use for duel effect" },
+	{ n:"cg_duelShaderTest", v:"0", d:"Always show the duel effect (for customisation)" },
+	{ n:"cg_forceAllyColour", v:"64 192 255", d:"RGB colour of allies in team gametypes" },
+	{ n:"cg_forceAllyModel", v:"rebel/default", d:"Player model of allies in team gametypes" },
+	{ n:"cg_forceEnemyColour", v:"0 255 0", d:"RGB colour of enemies" },
+	{ n:"cg_forceEnemyModel", v:"stormtrooper/default", d:"Player model of enemies" },
+	{ n:"cg_forceEnemySaber", v:"", d:"Force enemies to use this saber" },
+	{ n:"cg_forceOwnSaber", v:"", d:"Force yourself to use this saber (regardless of the server having it)" },
+	{ n:"cg_fovAspectAdjust", v:"0", d:"Automatically adjust field of view for widescreen resolutions" },
+	{ n:"cg_fovViewmodel", v:"0", d:"Field of view for your weapon in first-person" },
+	{ n:"cg_gunAlign", v:"0 0 0", d:"Offset of your weapon in first-person" },
+	{ n:"cg_gunBob", v:"0.005 0.01 0.005", d:"Control the pitch/yaw/roll amount of gun bobbing" },
+	{ n:"cg_gunBobEnable", v:"1", d:"Enable weapon viewmodel bob when running" },
+	{ n:"cg_gunIdleDrift", v:"0.01 0.01 0.01 0.001", d:"Control the pitch/yaw/roll + speed of gun idle drift" },
+	{ n:"cg_gunIdleDriftEnable", v:"1", d:"Enable weapon viewmodel drift when idle" },
+	{ n:"cg_hudStatsPos", v:"2 240", d:"Position of the statistics HUD" },
+	{ n:"cg_hudStatsScale", v:"0.375", d:"Size of the statistics HUD" },
+	{ n:"cg_instantDuck", v:"0", d:"Instantly move the camera when ducking, or interpolate the camera position." },
+	{ n:"cg_jplua", v:"1", d:"Enable JPLua scripting" },
+	{ n:"cg_lagometerPos", v:"592 320", d:"Position of the lagometer" },
+	{ n:"cg_logChat", v:"1", d:"Log chat messages to a file" },
+	{ n:"cg_logConsole", v:"1", d:"Log console to a file" },
+	{ n:"cg_logDebug", v:"1", d:"Log debug info to a file" },
+	{ n:"cg_logFormat", v:"1", d:"Format of timestamp on log files" },
+	{ n:"cg_logSecurity", v:"1", d:"Log security notifications to a file" },
+	{ n:"cg_movementKeys", v:"0", d:"Show which movement keys are being pressed" },
+	{ n:"cg_movementKeysPos", v:"320 240", d:"Position of the movement keys HUD" },
+	{ n:"cg_movementKeysScale", v:"1.0", d:"Size of the movement keys HUD" },
+	{ n:"cg_newChatbox", v:"0", d:"Use the new JA++ chatbox or the basejka chatbox" },
+	{ n:"cg_newFX", v:"0", d:"Enable certain effects" },
+	{ n:"cg_newScoreboard", v:"0", d:"Choose between the basejka scoreboard or the new scoreboard" },
+	{ n:"cg_newScoreboardFont", v:"6", d:"Font to use for the new scoreboard" },
+	{ n:"cg_oldScoreboardShowBots", v:"0", d:"Identify bots on the scoreboard" },
+	{ n:"cg_oldScoreboardSkinIcons", v:"0", d:"Show skin icons on the scoreboard" },
+	{ n:"cg_saberBladeCoreMulti", v:"1", d:"Adjust the saber blade width for SFX sabers" },
+	{ n:"cg_saberBladeGlowMulti", v:"1.25", d:"Adjust the saber glow width for SFX sabers" },
+	{ n:"cg_saberTrailLength", v:"0.7", d:"Choose the saber trail length for basejka sabers" },
+	{ n:"cg_saberWidth", v:"0.8", d:"Adjust the saber blade width for basejka sabers" },
+	{ n:"cg_scorePlums", v:"1", d:"Show floating numbers when you score a point" },
+	{ n:"cg_shieldColour", v:"72 128 224 255 0", d:"Colour of the \"player hit\" shield effect + force alpha" },
+	{ n:"cg_shieldLayers", v:"1", d:"How many times to render the \"player hit\" shield effect" },
+	{ n:"cg_shieldStyle", v:"-1", d:"Shader to use for \"player hit\" shield effect (-1 = basejka)" },
+	{ n:"cg_shieldTest", v:"0", d:"Always show the \"player hit\" shield effect (for customisation)" },
+	{ n:"cg_showDuelSabers", v:"1", d:"Hide or show sabers of dueling players" },
+	{ n:"cg_smartEntities", v:"1", d:"Increase performance by not rendering players behind walls" },
+	{ n:"cg_smoothCamera", v:"0", d:"Use a smooth third-person camera" },
+	{ n:"cg_statsHUD", v:"0", d:"Show statistics about the current game" },
+	{ n:"cg_strafeHelper", v:"0", d:"Show the ideal angles for various strafing styles (0 = disabled, 1 = single beat, 2 = inverted)" },
+	{ n:"cg_strafeHelperAngle", v:"20.0", d:"Angle between strafe helper lines" },
+	{ n:"cg_strafeHelperColor", v:"0 255 255 255", d:"Colour of the strafe helper lines" },
+	{ n:"cg_strafeHelperLength", v:"100", d:"Length of the strafe helper lines" },
+	{ n:"cg_strafeHelperRadius", v:"1", d:"Radius of the strafe helper lines" },
+	{ n:"cg_strafeHelperVelocity", v:"1", d:"Show velocity vector" },
+	{ n:"cg_strafeTrail", v:"0", d:"Show a trail behind fast-moving players (0 = disabled, 1 = ghost, 2 = line)" },
+	{ n:"cg_strafeTrailWeights", v:"300 1500", d:"Set the minimum and maximum speed for drawing strafe trails" },
+	{ n:"cg_teamSabersRGB", v:"0", d:"Force team colours for sabers, or allow RGB saber colours" },
+	{ n:"cg_topRightFont", v:"6", d:"Font to use for FPS/timer info in the top-right corner" },
+	{ n:"cg_topRightSize", v:"1.0", d:"Size of the font to use for FPS/timer info in the top-right corner" },
+	{ n:"cg_trueEyePosition", v:"-2", d:"Offset your eye position to avoid camera clipping" },
+	{ n:"cg_trueFlip", v:"0", d:"Affect the camera's pitch in trueview (0 = disabled, 1 = simple, 2 = advanced)" },
+	{ n:"cg_trueFOV", v:"110", d:"Field of view" },
+	{ n:"cg_trueGuns", v:"0", d:"Use a realistic view for guns in first person" },
+	{ n:"cg_trueInvertSaber", v:"1", d:"Invert first/third person when using saber" },
+	{ n:"cg_trueMoveRoll", v:"1", d:"Affect the camera's roll in trueview for all animations." },
+	{ n:"cg_trueRoll", v:"1", d:"Affect the camera's roll in trueview (0 = disabled, 1 = simple, 2 = advanced)" },
+	{ n:"cg_trueSaberOnly", v:"0", d:"Only show your saber when in trueview" },
+	{ n:"cg_trueSpin", v:"1", d:"Affect the camera's yaw in trueview (0 = disabled, 1 = simple, 2 = advanced)" },
+	{ n:"cg_viewBob", v:"0.002 0.002 0.005 1", d:"How much to bob the camera by in first-person (pitch, roll, speed, bob-up)" },
+	{ n:"cg_viewKickDamage", v:"1", d:"Enable view kicking when taking damage" },
+	{ n:"cg_viewShake", v:"1", d:"Enable view shaking (e.g. when charging pistol)" },
+	{ n:"cp_pluginDisable", v:"", d:"Disable certain game-changing features on compatible servers" },
+	{ n:"japp_crashHandler", v:"1", d:"Enable crash logging" },
+	{ n:"r_autoMapAngle", v:"90.0 0.0 0.0", d:"FIXME" },
+	{ n:"r_autoMapFov", v:"90.0", d:"FIXME" },
+	{ n:"ui_showMissingSkins", v:"1", d:"Show icons for skins without an icon in the character selection menu" }
+];
+
+function min(x,y) { return x<y?x:y; }
+function max(x,y) { return x>y?x:y; }
+
+document.write( '<div id="pagewrap"><table class="fullwidth cvars"><th width="50%">Server cvars</th><th width="50%">Client cvars</th>' );
+
+function writeCvar( cvars, cv ) {
+	if ( cv < cvars.length ) {
+		document.write( '<span class="cvar">' + cvars[cv].n + '</span> <span class="default">[default: ' + cvars[cv].v
+			+ ']</span><br />' );
+		document.write( '<span class="description">' + cvars[cv].d + '</span>' );
+	}
+}
+
+len = max( serverCvars.length, clientCvars.length );
+for ( cv=0; cv<len; cv++ ) {
+	document.write( '<tr><td>' );
+	writeCvar( serverCvars, cv );
+	document.write( '</td><td>' );
+	writeCvar( clientCvars, cv );
+	document.write( '</td></tr>' );
+}
+document.write( "</table></div>" );
+
+</script>
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

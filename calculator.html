@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ - Bit-field Calculator</title>
+<link href="styles.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+function hide( id ) {
+	document.getElementById( id ).style.display = 'none';
+}
+function show( id ) {
+	document.getElementById( id ).style.display = '';
+}
+function spoilerhide() {
+	for ( i=0; i<document.getElementsByTagName( 'div' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'div' )[i].className == 'spoiler' ) {
+			document.getElementsByTagName( 'div' )[i].style.color = '#000000';
+		}
+	}
+}
+function spoilershow() {
+	for ( i=0; i<document.getElementsByTagName( 'div' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'div' )[i].className == 'spoiler' ) {
+			document.getElementsByTagName( 'div' )[i].style.color = '#FFFFFF';
+		}
+	}
+}
+</script>
+</head>
+<body onload="init_bar();">
+
+<h1>Bit-field Calculator</h1>
+
+<hr />
+
+<div id="pagewrap">
+	<p>Many cvars in JA++ use a technique called <a href="https://en.wikipedia.org/wiki/Bit_field">bit-fields</a> to compactly store settings.<br/>
+	The down-side to this is it can be difficult or time-consuming changing these seemingly magic values.<br/>
+	To combat this, I've developed a calculator of sorts that will be kept up to date with the latest JA++ versions, to do the tedious work for you.</p>
+	<p>Hover your mouse over settings to see their description.</p>
+	<script type="text/javascript">
+
+	const sv_bitfields = [
+		{ ln:"dmflags", sn:"dmflags", desc:"Various settings", ashex:false,
+			bitvalues:[
+				{ disp:null, def:false, desc:"N/A" },
+				{ disp:null, def:false, desc:"N/A" },
+				{ disp:null, def:false, desc:"N/A" },
+				{ disp:"DF_NO_FALLING", def:false, desc:"No fall damage" },
+				{ disp:"DF_FIXED_FOV", def:false, desc:"Force cg_fov 80" },
+				{ disp:"DF_NO_FOOTSTEPS", def:false, desc:"No footsteps" },
+				{ disp:"DF_NO_DROWN", def:false, desc:"No drowning" }
+			]
+		},
+
+		{ ln:"g_allowVote", sn:"vote", desc:"Enable these options for /callvote", ashex:false,
+			bitvalues:[
+				{ disp:"allready", def:true, desc:"Disable voting for allready" },
+				{ disp:"capturelimit", def:true, desc:"Disable voting for capturelimit" },
+				{ disp:"clientkick", def:true, desc:"Disable voting for clientkick" },
+				{ disp:"cointoss", def:true, desc:"Disable voting for cointoss" },
+				{ disp:"fraglimit", def:true, desc:"Disable voting for fraglimit" },
+				{ disp:"g_gametype", def:true, desc:"Disable voting for g_gametype" },
+				{ disp:"japp_instagib", def:true, desc:"Disable voting for japp_instagib" },
+				{ disp:"japp_promode", def:true, desc:"Disable voting for japp_promode" },
+				{ disp:"japp_shootFromEye", def:true, desc:"Disable voting for japp_shootFromEye" },
+				{ disp:"japp_speedCaps", def:true, desc:"Disable voting for japp_speedCaps" },
+				{ disp:"japp_suicideDropFlag", def:true, desc:"Disable voting for japp_suicideDropFlag" },
+				{ disp:"kick", def:true, desc:"Disable voting for kick" },
+				{ disp:"map", def:true, desc:"Disable voting for map" },
+				{ disp:"map_restart", def:true, desc:"Disable voting for map_restart" },
+				{ disp:"nextmap", def:true, desc:"Disable voting for nextmap" },
+				{ disp:"pause", def:true, desc:"Disable voting for pause" },
+				{ disp:"shuffle", def:true, desc:"Disable voting for shuffle" },
+				{ disp:"timelimit", def:true, desc:"Disable voting for timelimit" },
+				{ disp:"warmup", def:true, desc:"Disable voting for warmup" }
+			]
+		},
+
+		{ ln:"g_privateDuel", sn:"privduel", desc:"Private duel options", ashex:false,
+			bitvalues:[
+				{ disp:"PRIVDUEL_ALLOW", def:true, desc:"Allow private duels" },
+				{ disp:"PRIVDUEL_MULTI", def:true, desc:"Allow multiple duels at once" },
+				{ disp:"PRIVDUEL_RESPAWN", def:true, desc:"Respawn players where duel was initiated after it ends" },
+				{ disp:"PRIVDUEL_NOSEVER", def:false, desc:"Don't cancel a duel if the combatants get too far away" },
+				{ disp:"PRIVDUEL_TEAM", def:true, desc:"Allow duel in team gametypes" },
+				{ disp:"PRIVDUEL_WEAP", def:false, desc:"Allow weapon duels" }
+			]
+		},
+
+		{ ln:"g_forcePowerDisable", sn:"force", desc:"Disable certain force powers", ashex:false,
+			bitvalues:[
+				{ disp:"FP_HEAL", def:true, desc:"Heal" },
+				{ disp:"FP_LEVITATION", def:false, desc:"Jump" },
+				{ disp:"FP_SPEED", def:true, desc:"Speed" },
+				{ disp:"FP_PUSH", def:true, desc:"Push" },
+				{ disp:"FP_PULL", def:true, desc:"Pull" },
+				{ disp:"FP_TELEPATHY", def:true, desc:"Mind Trick" },
+				{ disp:"FP_GRIP", def:true, desc:"Grip" },
+				{ disp:"FP_LIGHTNING", def:true, desc:"Lightning" },
+				{ disp:"FP_RAGE", def:true, desc:"Dark Rage" },
+				{ disp:"FP_PROTECT", def:true, desc:"Protect" },
+				{ disp:"FP_ABSORB", def:true, desc:"Absorb" },
+				{ disp:"FP_TEAM_HEAL", def:true, desc:"Team Heal" },
+				{ disp:"FP_TEAM_FORCE", def:true, desc:"Team Energize" },
+				{ disp:"FP_DRAIN", def:true, desc:"Drain" },
+				{ disp:"FP_SEE", def:true, desc:"Sight" },
+				{ disp:"FP_SABER_OFFENSE", def:false, desc:"Saber Attack" },
+				{ disp:"FP_SABER_DEFENSE", def:false, desc:"Saber Defend" },
+				{ disp:"FP_SABERTHROW", def:true, desc:"Saber Throw" }
+			]
+		},
+
+		{ ln:"g_weaponDisable", sn:"weaps", desc:"Disable certain weapon pickups", ashex:false,
+			bitvalues:[
+				{ disp:"WP_NONE", def:true, desc:"None" },
+				{ disp:"WP_STUN_BATON", def:true, desc:"Stun Baton" },
+				{ disp:"WP_MELEE", def:false, desc:"Melee" },
+				{ disp:"WP_SABER", def:false, desc:"Lightsaber" },
+				{ disp:"WP_BRYAR_PISTOL", def:true, desc:"DL-44 Blaster Pistol" },
+				{ disp:"WP_BLASTER", def:true, desc:"E-11 Blaster Rifle" },
+				{ disp:"WP_DISRUPTOR", def:true, desc:"Tenloss DXR-6 Disruptor" },
+				{ disp:"WP_BOWCASTER", def:true, desc:"Wookiee Bowcaster" },
+				{ disp:"WP_REPEATER", def:true, desc:"Heavy Repeater" },
+				{ disp:"WP_DEMP2", def:true, desc:"Destructive Electro-magnetic Pulse 2" },
+				{ disp:"WP_FLECHETTE", def:true, desc:"Golan Arms FC-1 Flechette Launcher" },
+				{ disp:"WP_ROCKET_LAUNCHER", def:true, desc:"Merr-Son PLX-2M Portable Missile Launcher" },
+				{ disp:"WP_THERMAL", def:true, desc:"Thermal Detonator" },
+				{ disp:"WP_TRIP_MINE", def:true, desc:"Trip Mine" },
+				{ disp:"WP_DET_PACK", def:true, desc:"Detonation Pack" },
+				{ disp:"WP_CONCUSSION", def:true, desc:"Stouker Concussion Rifle" },
+				{ disp:"WP_BRYAR_OLD", def:true, desc:"Bryar Pistol" },
+				{ disp:"WP_EMPLACED_GUN", def:false, desc:"Emplaced Gun" },
+				{ disp:"WP_TURRET", def:false, desc:"Turret" }
+			]
+		},
+
+		{ ln:"g_duelWeaponDisable", sn:"duelweaps", desc:"Disable certain weapon pickups in Duel gametypes", ashex:false,
+			bitvalues:[
+				{ disp:"WP_NONE", def:true, desc:"None" },
+				{ disp:"WP_STUN_BATON", def:true, desc:"Stun Baton" },
+				{ disp:"WP_MELEE", def:true, desc:"Melee" },
+				{ disp:"WP_SABER", def:false, desc:"Lightsaber" },
+				{ disp:"WP_BRYAR_PISTOL", def:true, desc:"DL-44 Blaster Pistol" },
+				{ disp:"WP_BLASTER", def:true, desc:"E-11 Blaster Rifle" },
+				{ disp:"WP_DISRUPTOR", def:true, desc:"Tenloss DXR-6 Disruptor" },
+				{ disp:"WP_BOWCASTER", def:true, desc:"Wookiee Bowcaster" },
+				{ disp:"WP_REPEATER", def:true, desc:"Heavy Repeater" },
+				{ disp:"WP_DEMP2", def:true, desc:"Destructive Electro-magnetic Pulse 2" },
+				{ disp:"WP_FLECHETTE", def:true, desc:"Golan Arms FC-1 Flechette Launcher" },
+				{ disp:"WP_ROCKET_LAUNCHER", def:true, desc:"Merr-Son PLX-2M Portable Missile Launcher" },
+				{ disp:"WP_THERMAL", def:true, desc:"Thermal Detonator" },
+				{ disp:"WP_TRIP_MINE", def:true, desc:"Trip Mine" },
+				{ disp:"WP_DET_PACK", def:true, desc:"Detonation Pack" },
+				{ disp:"WP_CONCUSSION", def:true, desc:"Stouker Concussion Rifle" },
+				{ disp:"WP_BRYAR_OLD", def:true, desc:"Bryar Pistol" },
+				{ disp:"WP_EMPLACED_GUN", def:true, desc:"Emplaced Gun" },
+				{ disp:"WP_TURRET", def:true, desc:"Turret" }
+			]
+		},
+
+		{ ln:"japp_allowHook", sn:"grapple", desc:"Allow grapple hook in these gametypes", ashex:false,
+			bitvalues:[
+				{ disp:"GT_FFA", def:true, desc:"Deathmatch" },
+				{ disp:"GT_HOLOCRON", def:false, desc:"Holocron Deathmatch" },
+				{ disp:"GT_JEDIMASTER", def:false, desc:"Jedi Master" },
+				{ disp:"GT_DUEL", def:false, desc:"Duel" },
+				{ disp:"GT_POWERDUEL", def:false, desc:"Power Duel" },
+				{ disp:"GT_SINGLE_PLAYER", def:false, desc:"Single Player" },
+				{ disp:"GT_TEAM", def:false, desc:"Team Deathmatch" },
+				{ disp:"GT_SIEGE", def:false, desc:"Siege" },
+				{ disp:"GT_CTF", def:false, desc:"Capture The Flag" },
+				{ disp:"GT_CTY", def:false, desc:"Capture The Ysalimiri" }
+			]
+		},
+
+		{ ln:"japp_allowVoiceChat", sn:"voicechat", desc:"Allow voice chat in these gametypes", ashex:false,
+			bitvalues:[
+				{ disp:"GT_FFA", def:false, desc:"Deathmatch" },
+				{ disp:"GT_HOLOCRON", def:false, desc:"Holocron Deathmatch" },
+				{ disp:"GT_JEDIMASTER", def:false, desc:"Jedi Master" },
+				{ disp:"GT_DUEL", def:false, desc:"Duel" },
+				{ disp:"GT_POWERDUEL", def:false, desc:"Power Duel" },
+				{ disp:"GT_SINGLE_PLAYER", def:false, desc:"Single Player" },
+				{ disp:"GT_TEAM", def:true, desc:"Team Deathmatch" },
+				{ disp:"GT_SIEGE", def:true, desc:"Siege" },
+				{ disp:"GT_CTF", def:true, desc:"Capture The Flag" },
+				{ disp:"GT_CTY", def:true, desc:"Capture The Ysalimiri" }
+			]
+		},
+
+		{ ln:"japp_spawnWeaps", sn:"spawnweaps", desc:"Spawn with these weapons", ashex:false,
+			bitvalues:[
+				{ disp:"WP_NONE", def:false, desc:"None" },
+				{ disp:"WP_STUN_BATON", def:false, desc:"Stun Baton" },
+				{ disp:"WP_MELEE", def:true, desc:"Melee" },
+				{ disp:"WP_SABER", def:true, desc:"Lightsaber" },
+				{ disp:"WP_BRYAR_PISTOL", def:true, desc:"DL-44 Blaster Pistol" },
+				{ disp:"WP_BLASTER", def:false, desc:"E-11 Blaster Rifle" },
+				{ disp:"WP_DISRUPTOR", def:false, desc:"Tenloss DXR-6 Disruptor" },
+				{ disp:"WP_BOWCASTER", def:false, desc:"Wookiee Bowcaster" },
+				{ disp:"WP_REPEATER", def:false, desc:"Heavy Repeater" },
+				{ disp:"WP_DEMP2", def:false, desc:"Destructive Electro-magnetic Pulse 2" },
+				{ disp:"WP_FLECHETTE", def:false, desc:"Golan Arms FC-1 Flechette Launcher" },
+				{ disp:"WP_ROCKET_LAUNCHER", def:false, desc:"Merr-Son PLX-2M Portable Missile Launcher" },
+				{ disp:"WP_THERMAL", def:false, desc:"Thermal Detonator" },
+				{ disp:"WP_TRIP_MINE", def:false, desc:"Trip Mine" },
+				{ disp:"WP_DET_PACK", def:false, desc:"Detonation Pack" },
+				{ disp:"WP_CONCUSSION", def:false, desc:"Stouker Concussion Rifle" },
+				{ disp:"WP_BRYAR_OLD", def:false, desc:"Bryar Pistol" },
+				{ disp:"WP_EMPLACED_GUN", def:false, desc:"Emplaced Gun" },
+				{ disp:"WP_TURRET", def:false, desc:"Turret" }
+			]
+		},
+
+		{ ln:"japp_teleportBits", sn:"teleport", desc:"Control behaviour of teleporters, including admin teleporting", ashex:false,
+			bitvalues:[
+				{ disp:"TPBIT_SILENT", def:false, desc:"Don't play a sound" },
+				{ disp:"TPBIT_NOSLICK", def:false, desc:"Don't set the slick property on the player" },
+				{ disp:"TPBIT_KEEPVELOCITY", def:false, desc:"Don't set the player's velocity to 400 ups in the direction of the teleporter" },
+				{ disp:"TPBIT_KEEPANGLES", def:false, desc:"Don't set the player's viewangles to the teleporter's" },
+				{ disp:"TPBIT_NOTELEFRAG", def:false, desc:"Avoid telefrags. Incomplete, may result in getting stuck in walls." }
+			]
+		},
+
+		{ ln:"japp_userinfoValidate", sn:"userinfo", desc:"Control strictness of userinfo filtering", ashex:false,
+			bitvalues:[
+				{ disp:"cl_guid", def:true, desc:"Kick if field exists" },
+				{ disp:"cl_punkbuster", def:true, desc:"Kick if field exists" },
+				{ disp:"ip", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"cp_pluginDisable", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"name", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"rate", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"snaps", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"model", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"forcepowers", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"color1", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"color2", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"handicap", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"sex", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"cg_predictItems", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"saber1", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"saber2", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"char_color_red", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"char_color_green", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"char_color_blue", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"cp_sbRGB1", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"cp_sbRGB2", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"teamtask", def:true, desc:"Kick if field does not exist, or there is more than one instance" },
+				{ disp:"password", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"cjp_client", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"csf", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"teamoverlay", def:true, desc:"Kick if there is more than one instance of this field" },
+				{ disp:"UI_VALID_SIZE", def:true, desc:"Kick if userinfo is too large or too small" },
+				{ disp:"UI_VALID_SLASH", def:true, desc:"Kick if userinfo contains bad amount of slashes or badly formatted slashes" },
+				{ disp:"UI_VALID_EXTASCII", def:false, desc:"Kick if extended ASCII characters are found" },
+				{ disp:"UI_VALID_CONTROLCHARS", def:true, desc:"Kick if control characters are found" }
+			]
+		},
+
+		{ ln:"Admin permissions", sn:"admin", desc:"Customise what commands each admin user is allowed to use", ashex:false,
+			bitvalues:[
+				{ disp:"WhoIs", def:false, desc:"amwhois" },
+				{ disp:"Status", def:false, desc:"amstatus" },
+				{ disp:"Announce", def:false, desc:"ampsay" },
+				{ disp:"Ghost", def:false, desc:"amghost" },
+				{ disp:"No-clip", def:false, desc:"amclip" },
+				{ disp:"Teleport", def:false, desc:"amlisttele amremovetele amsavetele amseetele amtele amtelemark guntele guntelemark guntelerev" },
+				{ disp:"Poll", def:false, desc:"ampoll" },
+				{ disp:"Kill Vote", def:false, desc:"amkillvote" },
+				{ disp:"Force Team", def:false, desc:"amforceteam gunspectate" },
+				{ disp:"Protect", def:false, desc:"amprotect gunprotect" },
+				{ disp:"Empower", def:false, desc:"amempower" },
+				{ disp:"Slap", def:false, desc:"amslap gunslap" },
+				{ disp:"Sleep", def:false, desc:"amsleep amwake gunsleep" },
+				{ disp:"Silence", def:false, desc:"amsilence amunsilence" },
+				{ disp:"Slay", def:false, desc:"amslay" },
+				{ disp:"Kick", def:false, desc:"amkick" },
+				{ disp:"Ban", def:false, desc:"amban ambanip" },
+				{ disp:"Remap", def:false, desc:"amremap" },
+				{ disp:"Weather", def:false, desc:"amweather" },
+				{ disp:"Entity Spawning", def:false, desc:"amspawn amunspawn" },
+				{ disp:"NPC Spawning", def:false, desc:"amnpc" },
+				{ disp:"Lua", def:false, desc:"amluaexec amluareload" },
+				{ disp:"VStr", def:false, desc:"amvstr" },
+				{ disp:"Merc", def:false, desc:"ammerc" },
+				{ disp:"Change Map", def:false, desc:"ammap" },
+				{ disp:"Rename", def:false, desc:"amrename" },
+				{ disp:"Lock Teams", def:false, desc:"amlockteam amunlockteam" }
+			]
+		}
+	]
+
+	const cl_bitfields = [
+		{ ln:"cg_drawTimer", sn:"timer", desc:"Control behaviour of the map timer in the top-left corner on your HUD", ashex:false,
+			bitvalues:[
+				{ disp:"DRAWTIMER_ENABLE", def:false, desc:"Map timer will be shown on the HUD" },
+				{ disp:"DRAWTIMER_COUNTDOWN", def:false, desc:"Map timer will count down if a timelimit is set" },
+				{ disp:"DRAWTIMER_COLOUR", def:false, desc:"Map timer will change colour showing the halfway mark, last quarter, and final minute" }
+			]
+		},
+
+		{ ln:"cp_pluginDisable", sn:"plugindisable", desc:"Disable various features (JA+ compatibility)", ashex:false,
+			bitvalues:[
+				{ disp:null, def:false, desc:"CPD_NEWDRAINEFX" },
+				{ disp:"CPD_DUELSEEOTHERS", def:false, desc:"See other players when dueling" },
+				{ disp:null, def:false, desc:"CPD_ENDDUELROTATION" },
+				{ disp:"CPD_BLACKSABERSDISABLE", def:false, desc:"Disable black sabers" },
+				{ disp:null, def:false, desc:"CPD_AUTOREPLYDISABLE" },
+				{ disp:null, def:false, desc:"CPD_NEWFORCEEFFECT" },
+				{ disp:null, def:false, desc:"CPD_NEWDEATHMSG_DISABLE" },
+				{ disp:null, def:false, desc:"CPD_NEWSIGHTEFFECT" },
+				{ disp:null, def:false, desc:"CPD_NOALTDIMEFFECT" },
+				{ disp:null, def:false, desc:"CPD_HOLSTEREDSABER" },
+				{ disp:"CPD_LEDGEGRAB", def:false, desc:"Disable ledge-grab" },
+				{ disp:null, def:false, desc:"CPD_NEWDFAPRIM" },
+				{ disp:null, def:false, desc:"CPD_NEWDFAALT" },
+				{ disp:null, def:false, desc:"CPD_NOSPCARTWHEEL" },
+				{ disp:null, def:false, desc:"CPD_ALLOWLIBCURL" },
+				{ disp:"CPD_NOKATA", def:false, desc:"Disable katas" },
+				{ disp:"CPD_NOBUTTERFLY", def:false, desc:"Disable dual/staff butterfly" },
+				{ disp:"CPD_NOSTAB", def:false, desc:"Disable roll/back stab" },
+				{ disp:"CPD_NODFA", def:false, desc:"Disable DFA" },
+			]
+		},
+
+		{ ln:"cg_newFX", sn:"newfx", desc:"Enable new effects", ashex:false,
+			bitvalues:[
+				{ disp:"NEWFX_DISINT", def:false, desc:"Disintegration effects" },
+				{ disp:"NEWFX_RUPTOR", def:false, desc:"Railgun-style disruptor effects" },
+				{ disp:"NEWFX_REPEATER_ALT", def:false, desc:"Repeater secondary-fire effects" },
+				{ disp:"NEWFX_SIMPLEFLAG", def:false, desc:"Simple 2D flags in CTF" },
+				{ disp:"NEWFX_TRANSFLAG", def:false, desc:"Transparent flags in CTF" },
+				{ disp:"NEWFX_SFXSABERS", def:false, desc:"New saber blade graphics" }
+			]
+		},
+
+		{ ln:"csf", sn:"csf", desc:"Client support flags, don't touch unless you know what you're doing", ashex:true,
+			bitvalues:[
+				{ disp:"CSF_GRAPPLE_SWING", def:true, desc:"Advanced grapple hook (swinging)" },
+				{ disp:"CSF_SCOREBOARD_LARGE", def:true, desc:"Allow more than 20 players on the scoreboard" },
+				{ disp:"CSF_SCOREBOARD_KD", def:true, desc:"Show K/D data on scoreboard" },
+				{ disp:"CSF_CHAT_FILTERS", def:true, desc:"Support chat filtering for tabbed chatbox" },
+				{ disp:"CSF_FIXED_WEAPON_ANIMS", def:true, desc:"Fix weapon firing animations (bryar/concussion)" }
+			]
+		}
+	]
+
+	function calculateBitvalue(name, hex) {
+		var result = 0;
+		for ( bv=0; bv<document[name]['bfcb_' + name].length; bv++ ) {
+			if ( document[name]['bfcb_' + name][bv].checked == true ) {
+				result = result | (1 << document[name]['bfcb_' + name][bv].value);
+			}
+		}
+		document[name]['bfval_' + name].value = hex ? result.toString(16) : result;
+	}
+
+	function min(x,y) { return x<y?x:y; }
+	function max(x,y) { return x>y?x:y; }
+
+	document.write( "<table class=\"fullwidth\"><th width=\"50%\">Server cvars</th><th width=\"50%\">Client cvars</th>" );
+
+	function writeBitfield( bitfield, idx ) {
+		if ( idx < bitfield.length ) {
+			document.write( "<div id=\"" + bitfield[idx].sn + "\" class=\"bitfield\">\n" );
+			document.write( "<form name=\"" + bitfield[idx].sn + "\" id=\"" + bitfield[idx].sn + "\">\n" );
+			document.write( "<span title=\"" + bitfield[idx].desc + "\">" + bitfield[idx].ln + ":</span> <input type=\"text\" id=bfval_" + bitfield[idx].sn + " name=bfval_" + bitfield[idx].sn + " value=\"0\" size=\"8\" /><br />\n" );
+
+			document.write( "<div id=\"" + bitfield[idx].sn + "Closed\"><input type=\"button\" onclick=\"hide('" + bitfield[idx].sn + "Closed'); show('" + bitfield[idx].sn + "Open'); spoilershow();\" value=\"Show\" /></div>\n" );
+			document.write( "<div id=\"" + bitfield[idx].sn + "Open\" style=\"display:none;\"><input type=\"button\" onclick=\"show('" + bitfield[idx].sn + "Closed'); hide('" + bitfield[idx].sn + "Open'); spoilerhide();\" value=\"Hide\" /><br />\n" );
+			for ( bv=0; bv<bitfield[idx].bitvalues.length; bv++ ) {
+				if ( bitfield[idx].bitvalues[bv].disp != null ) {
+					document.write( "<input type=\"checkbox\" "
+									+ "name=bfcb_" + bitfield[idx].sn + " "
+									+ "id=bfcb_" + bitfield[idx].sn + bv + " "
+									+ "value=\"" + bv + "\" "
+									+ "onClick=\"calculateBitvalue('" + bitfield[idx].sn + "', " + bitfield[idx].ashex + ");\" "
+									+ "title=\"" + bitfield[idx].bitvalues[bv].desc + "\" "
+									+ ((bitfield[idx].bitvalues[bv].def==true)?"checked=\"checked\"" : "") + "/>" );
+					document.write( "<span title=\"" + bitfield[idx].bitvalues[bv].desc + "\">" + bitfield[idx].bitvalues[bv].disp + "</span><br />" );
+				}
+			}
+			document.write( "</form></div><br />\n" );
+			calculateBitvalue( bitfield[idx].sn, bitfield[idx].ashex );
+		}
+	}
+
+	len = max( sv_bitfields.length, cl_bitfields.length );
+	for ( bf=0; bf<len; bf++ ) {
+		document.write( "<tr><td valign=\"top\">" );
+		writeBitfield( sv_bitfields, bf );
+		document.write( "</td><td valign=\"top\">" );
+		writeBitfield( cl_bitfields, bf );
+		document.write( "</td></tr>" );
+	}
+	document.write( "</table>" );
+
+	</script>
+</div>
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

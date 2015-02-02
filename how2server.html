@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ Getting Started With A Server</title>
+<link href="styles.css" rel="stylesheet" />
+</head>
+<body onload="init_bar();">
+<h1>Getting Started With A JA++ Server</h1>
+
+<hr />
+
+<div id="pagewrap">
+	<p>This tutorial assumes you're running Windows and are looking at migrating from JA+ to JA++</p>
+
+	<hr />
+
+	<h2>General</h2>
+	<p>JA++ is designed as a replacement for JA+, and will mimic many things JA+ does for various reasons.</p>
+
+	<p>First off, JA separates mods into separate directories next to <span class="code">GameData/base/</span>, and they are loaded by setting the <span class="code">fs_game</span> cvar.<br />
+	When a client connects to a server, they will automatically set their <span class="code">fs_game</span> value to the same as the server.<br />
+	This is how mods are automatically loaded when you join a server.</p>
+
+	<p>JA++ makes use of this to make it easier for clients to play on JA++ servers with their existing JA+ installation.<br />
+	Instead of JA++ having its own mod directory, it stays in <span class="code">GameData/japlus/</span> so JA++ client can be used on JA+ servers, and so JA+ clients can connect to JA++ servers.</p>
+
+	<p>JA++ also does some <em>version sniffing</em> to enable/disable some features, so JA++ will mimic JA+ in these cases (e.g. client-side <span class="code">cjp_client</span> cvar or server-side <span class="code">v</span> and <span class="code">gamename</span> cvars.<br />
+	The way to check your JA++ version is by checking the <span class="code">japp_version</span> cvar.</p>
+
+	<h2>Admin System</h2>
+	<p>One of the drawbacks to JA+'s ingame admin system is the limit of admin <em>accounts</em> (i.e. Council, Knight, Instructor). This does not suit every server.<br />
+	Instead, JA++ has a user+password account system, with no limit on the amount of accounts.</p>
+
+	<p>Each account has its own login message, and privileges.<br />
+	You can login to an account with <span class="code">amlogin user password</span></p>
+
+	<p>Admin users can be added, removed, listed and modified with these server/RCon commands:<br />
+	<div class="term">adminadd &lt;user&gt; &lt;pass&gt; &lt;privileges&gt; &lt;rank&gt; &lt;login message&gt;
+admindel &lt;user&gt;
+adminlist
+adminreload</div></p>
+
+	<p>To work out what privileges value you want, use the <a href="calculator.html">bit-value calculator</a>.<br />
+	All login data is stored on disk in <span class="code">japlus/admins.json</span> which is a human-readable <a href="https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example">JSON</a> file</p>
+</div>
+
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

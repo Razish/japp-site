@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ Downloads</title>
+<link href="styles.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+function hide( id ) {
+	document.getElementById( id ).style.display = 'none';
+}
+function show( id ) {
+	var buttonID = ('button_' + id);
+	document.getElementById( id ).style.display = '';
+	for ( i=0; i<document.getElementsByTagName( 'input' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'input' )[i].id != buttonID ) {
+			document.getElementsByTagName( 'input' )[i].style.fontWeight = 'normal';
+		}
+	}
+	document.getElementById( buttonID ).style.fontWeight = 'bold';
+}
+</script>
+</head>
+<body onload="init_bar();">
+<h1>Installation Instructions</h1>
+
+<p>Ideally, JA++ is installed <b><em>without</em></b> having JA+ already installed.<br />
+If JA+ is installed, you will have to remove it to avoid conflicts</p>
+
+<h2>If you already have JA+ installed</h2>
+<ol>
+	<li>Remove the JA+ GLA animations from your <span class="code">GameData/base</span> folder</li>
+	<li>Remove <span class="code">clientPlugin_v*.pk3</span> from <span class="code">GameData/japlus</span></li>
+	<li>Place the downloaded files in <span class="code">GameData/japlus</span></li>
+	<li>Start the game with <span class="code">+set fs_game &quot;japlus&quot;</span> as your command line arguments (e.g. .bat file, shortcut, with UU)</li>
+</ol>
+
+<h2>If you don't have JA+ installed</h2>
+<ol>
+	<li>Place the downloaded files in <span class="code">GameData/japlus</span></li>
+	<li>Start the game with <span class="code">+set fs_game &quot;japlus&quot;</span> as your command line arguments (e.g. .bat file, shortcut, with UU)</li>
+</ol>
+
+<hr />
+
+<h1>Download Links</h1>
+
+<p>JA++ is available for Windows, Mac and Linux<br />
+Due to not owning a Mac, the Mac builds will lag behind, and are provided by redsaurus in his spare time</p>
+
+<p>You will have to select the correct files for your operating system and CPU architecture (i.e. 32 bit, 64 bit)</p>
+
+<p>JA++ runs best on <a href="https://github.com/JACoders/OpenJK#jacoders-openjk-project">OpenJK</a></p>
+
+<div id="package" align="center">
+	<input id="button_cl" type="button" onClick="show( 'cl' ); hide( 'sv' )" class="button" value="Client" />
+	<input id="button_sv" type="button" onClick="hide( 'cl' ); show( 'sv' )" class="button" value="Server" />
+	<div id="cl" style="display:none;">
+		<input id="button_cl_win" type="button" onClick="show( 'cl_win' ); hide( 'cl_mac' ); hide( 'cl_linux' )" class="button" value="Windows" />
+		<input id="button_cl_mac" type="button" onClick="hide( 'cl_win' ); show( 'cl_mac' ); hide( 'cl_linux' )" class="button" value="Mac" />
+		<input id="button_cl_linux" type="button" onClick="hide( 'cl_win' ); hide( 'cl_mac' ); show( 'cl_linux' )" class="button" value="Linux" />
+		<div id="cl_win" style="display:none;">
+			<input id="button_cl_win_32" type="button" onClick="show( 'cl_win_32' )" class="button" value="32 bit" />
+			<div id="cl_win_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/cl_bins_win32.pk3">Binaries</a></td><td>21/11/14</td></tr>
+					<tr><td><a href="dl/cl_assets.pk3">Assets</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="cl_mac" style="display:none;">
+			<input id="button_cl_mac_32" type="button" onClick="show( 'cl_mac_32' )" class="button" value="32 bit" />
+			<div id="cl_mac_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/cl_bins_mac32.pk3">Binaries</a></td><td>06/05/14</td></tr>
+					<tr><td><a href="dl/cl_assets.pk3">Assets</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="cl_linux" style="display:none;">
+			<p>Make sure you install the readline library<br />
+			<div class="term"># apt-get install libreadline6</div></p>
+			<input id="button_cl_linux_64" type="button" onClick="show( 'cl_linux_64' ); hide( 'cl_linux_32' )" class="button" value="64 bit" />
+			<input id="button_cl_linux_32" type="button" onClick="hide( 'cl_linux_64' ); show( 'cl_linux_32' )" class="button" value="32 bit" />
+
+			<div id="cl_linux_64" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/cl_bins_linux64.zip">Binaries</a></td><td><span class="autocode"></span></td></tr>
+					<tr><td><a href="dl/cl_assets.pk3">Assets</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+
+			<div id="cl_linux_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/cl_bins_linux32.zip">Binaries</a></td><td><span class="autocode"></span></td></tr>
+					<tr><td><a href="dl/cl_assets.pk3">Assets</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div id="sv" style="display:none;">
+		<input id="button_sv_win" type="button" onClick="show( 'sv_win' ); hide( 'sv_mac' ); hide( 'sv_linux' )" class="button" value="Windows" />
+		<input id="button_sv_mac" type="button" onClick="hide( 'sv_win' ); show( 'sv_mac' ); hide( 'sv_linux' )" class="button" value="Mac" />
+		<input id="button_sv_linux" type="button" onClick="hide( 'sv_win' ); hide( 'sv_mac' ); show( 'sv_linux' )" class="button" value="Linux" />
+		<div id="sv_win" style="display:none;">
+			<input id="button_sv_win_32" type="button" onClick="show( 'sv_win_32' )" class="button" value="32 bit" />
+			<div id="sv_win_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/sv_bins_win32.pk3">Binaries</a></td><td>21/11/14</td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="sv_mac" style="display:none;">
+			<input id="button_sv_mac_32" type="button" onClick="show( 'sv_mac_32' )" class="button" value="32 bit" />
+			<div id="sv_mac_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/sv_bins_mac32.pk3">Binaries</a></td><td>07/05/14</td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="sv_linux" style="display:none;">
+			<input id="button_sv_linux_64" type="button" onClick="show( 'sv_linux_64' ); hide( 'sv_linux_32' )" class="button" value="64 bit" />
+			<input id="button_sv_linux_32" type="button" onClick="hide( 'sv_linux_64' ); show( 'sv_linux_32' )" class="button" value="32 bit" />
+			<div id="sv_linux_64" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/sv_bins_linux64.zip">Binaries</a></td><td><span class="autocode"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+
+			<div id="sv_linux_32" style="display:none;">
+				<table>
+					<tr><th>File</th><th>Last updated</th></tr>
+					<tr><td><a href="dl/sv_bins_linux32.zip">Binaries</a></td><td><span class="autocode"></span></td></tr>
+					<tr><td><a href="dl/sh_animations.pk3">Animations</a></td><td><span class="autoassets"></span></td></tr>
+					<tr><td><a href="dl/sh_lua.pk3">Lua</a></td><td><span class="autoassets"></span></td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" language="javascript">
+for ( i=0; i<document.getElementsByTagName( 'span' ).length; i++ ) {
+	if ( document.getElementsByTagName( 'span' )[i].className == "autocode" ) {
+		document.getElementsByTagName( 'span' )[i].innerHTML = '<a href="https://github.com/Razish/japp/commits/master">automatic</a>';
+	}
+	else if ( document.getElementsByTagName( 'span' )[i].className == "autoassets" ) {
+		document.getElementsByTagName( 'span' )[i].innerHTML = '<a href="https://github.com/Razish/japp-assets/commits/master">automatic</a>';
+	}
+}
+</script>
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

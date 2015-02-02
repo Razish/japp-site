@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ Landing Pad</title>
+<link href="styles.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+function hide( id ) {
+	var buttonHideID = ('button_hide_' + id);
+	var buttonShowID = ('button_show_' + id);
+	document.getElementById( id ).style.display = 'none';
+	for ( i=0; i<document.getElementsByTagName( 'input' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'input' )[i].id == buttonHideID ) {
+			document.getElementsByTagName( 'input' )[i].style.display = 'none';
+		}
+		else if ( document.getElementsByTagName( 'input' )[i].id == buttonShowID ) {
+			document.getElementsByTagName( 'input' )[i].style.display = '';
+		}
+	}
+}
+function show( id ) {
+	var buttonHideID = ('button_hide_' + id);
+	var buttonShowID = ('button_show_' + id);
+	document.getElementById( id ).style.display = '';
+	for ( i=0; i<document.getElementsByTagName( 'input' ).length; i++ ) {
+		if ( document.getElementsByTagName( 'input' )[i].id == buttonShowID ) {
+			document.getElementsByTagName( 'input' )[i].style.display = 'none';
+		}
+		else if ( document.getElementsByTagName( 'input' )[i].id == buttonHideID ) {
+			document.getElementsByTagName( 'input' )[i].style.display = '';
+		}
+	}
+}
+</script>
+</head>
+<body onload="init_bar();">
+<h1>JA++ Landing Pad - <a href="contact.html">Contact Me</a></h1>
+
+<hr />
+
+<div id="pagewrap">
+
+	<div id="about">
+		<p>JA++ is a mod designed to be used <em>instead</em> of JA+</p>
+
+		<p>JA+ is no longer being developed and there are numerous issues, JA++ is is actively developed with contributions from the community making it suitable for many types of servers.</p>
+		
+		<p>JA++ is not meant to be used <em>with</em> JA+, it is meant to replace it entirely. It is written in a way to be <em>compatible</em> with JA+.<br />
+		This means you can use the JA++ client on a JA+ server, and a JA+ client on a JA++ server.</p>
+
+		<p>Please <b><em><span style="color:#f00">do not install JA+</span></em></b> before installing JA++ as it may result in conflicts.</p>
+
+		<p><a href="download.html" class="download">Download JA++<br />with instructions</a></p>
+	</div>
+
+<div id="content">
+	<table class="fullwidth">
+		<tr>
+			<td>
+				<h2>Places</h2>
+				<ul>
+					<li><a href="http://japp.jkhub.org/forum/">Forums</a></li>
+					<li><a href="https://github.com/Razish/japp/issues">Issue tracker</a></li>
+				</ul>
+			</td>
+			<td>
+				<h2>Documentation</h2>
+				<ul>
+					<li><a href="cvars.html">Cvar list + descriptions</a></li>
+					<li><a href="commands.html">Command list + descriptions</a></li>
+					<li><a href="calculator.html">Bit-value calculator</a></li>
+					<li><a href="changelog.html">Changelog</a></li>
+				</ul>
+			</td>
+			<td>
+				<h2>Tutorials</h2>
+				<ul>
+					<li><a href="how2server.html">Migrating from a JA+ server</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h2>JPLua plugins</h2>
+				<input id="button_show_jplua" type="button" onClick="show( 'jplua' )" class="button" value="Show" />
+				<input id="button_hide_jplua" type="button" onClick="hide( 'jplua' )" class="button" value="Hide" style="display: none" />
+				<div id="jplua" style="display:none;">
+					<ul>
+						<li><a href="dl/cl_lua_chatstyle.pk3">&#91;Client&#93; Chat style</a></li>
+						<li><a href="dl/cl_lua_ignorebot.pk3">&#91;Client&#93; Ignore Bots</a></li>
+						<li><a href="dl/cl_lua_japlusadmguns.pk3">&#91;Client&#93; JA+ Admin Guns</a></li>
+						<li><a href="dl/cl_lua_japluscompat.pk3">&#91;Client&#93; JA+ helper</a></li>
+						<li><a href="dl/cl_lua_playerkiller.pk3">&#91;Client&#93; Player Killer</a></li>
+						<li><a href="dl/cl_lua_razhud.pk3">&#91;Client&#93; Raz0r's HUD</a></li>
+						<li><a href="dl/cl_lua_strafehud.pk3">&#91;Client&#93; Strafe HUD</a></li>
+						<li><a href="dl/sv_lua_automsg.pk3">&#91;Server&#93; AutoMsg</a></li>
+						<li><a href="dl/sv_lua_duelwhois.pk3">&#91;Server&#93; /duelwhois</a></li>
+						<li><a href="dl/sv_lua_iplog.pk3">&#91;Server&#93; IP Log</a></li>
+						<li><a href="dl/sv_lua_japluscompat.pk3">&#91;Server&#93; JA+ helper</a></li>
+						<li><a href="dl/sv_lua_japlusdl.pk3">&#91;Server&#93; JA+ Download Helper</a></li>
+						<li><a href="dl/sv_lua_motd.pk3">&#91;Server&#93; MoTD</a></li>
+						<li><a href="dl/sv_lua_spawnhealth.pk3">&#91;Server&#93; Spawn Health</a></li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<h2>Configs</h2>
+				<ul>
+					<li><a href="cfg/cljapp.cfg">&#91;Client&#93; Enable new JA++ features</a></li>
+					<li><a href="cfg/saber_only.cfg">&#91;Server&#93; &quot;saber-only&quot;</a></li>
+					<li><a href="cfg/ctfpug.cfg">&#91;Server&#93; CTF PUG</a></li>
+					<li><a href="cfg/ctfjapp.cfg">&#91;Server&#93; CTF JA++ tweaks</a></li>
+					<li><a href="cfg/instagib.cfg">&#91;Server&#93; Instagib mode</a></li>
+				</ul>
+			</td>
+			<td>
+				<h2>For developers</h2>
+				<ul>
+					<li><a href="https://github.com/Razish/japp">Source code on Github</a></li>
+					<li><a href="compiling.html">Compilation guide</a></li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>
+
+</div>
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

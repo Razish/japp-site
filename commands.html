@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ - Commands</title>
+<link href="styles.css" rel="stylesheet" />
+</head>
+<body onload="init_bar();">
+
+<h1>Commands</h1>
+
+<hr />
+
+<div id="pagewrap">
+	<p>Square brackets [] denote an optional argument.<br />
+	Angled brackets &lt;&gt; denote a required argument.<br />
+	Hover your mouse over commands to see their description.</p>
+
+	<script type="text/javascript">
+
+	const gameCmds = [
+		{ cmd:"amatease", args:null, desc:"Emote: arms behind back" },
+		{ cmd:"amharlem", args:null, desc:"Emote: do the harlem shake" },
+		{ cmd:"amhug", args:null, desc:"Emote: hug the player in front of you" },
+		{ cmd:"aminfo", args:"&lt;all, saber, cmds, client&gt;", desc:"Lists various information about the server, available commands, etc" },
+		{ cmd:"amkiss", args:null, desc:"Emote: kiss the player in front of you" },
+		{ cmd:"drop", args:"&lt;flag, weapon, powerup&gt;", desc:"Drops an item" },
+		{ cmd:"ignore", args:"&lt;client&gt;", desc:"Ignore chat messages from specified client" },
+		{ cmd:"joinchan", args:"&lt;identifier&gt; &lt;short name&gt;", desc:"Joins a private channel" },
+		{ cmd:"leavechan", args:"&lt;identifier&gt;", desc:"Leaves a private channel" },
+		{ cmd:"msgchan", args:"&lt;identifier&gt; &lt;message&gt;", desc:"Messages a private channel" },
+		{ cmd:"origin", args:"&lt;client&gt;", desc:"Display position and angles of a client" },
+		{ cmd:"saber", args:"&lt;saber1&gt; &lt;saber2&gt;", desc:"Switch sabers instantly" },
+		{ cmd:"sabercolor", args:"&lt;1-2&gt; &lt;0-255&gt; &lt;0-255&gt; &lt;0-255&gt;", desc:"Change RGB saber colour" },
+		{ cmd:"say_team_mod", args:"&lt;admin, team&gt;", desc:"Choose where team messages go" },
+		{ cmd:"whoischan", args:"&lt;identifier&gt;", desc:"Lists people in a channel" }
+	];
+
+	const clientCmds = [
+		{ cmd:"chattabfind", args:"&lt;tab name&gt;", desc:"Selects the specified chatbox tab, creating one if it doesn't exist" },
+		{ cmd:"chattabnext", args:null, desc:"Cycles to the next chatbox tab" },
+		{ cmd:"chattabprev", args:null, desc:"Cycles to the previous chatbox tab" },
+		{ cmd:"clearchat", args:null, desc:"Clears all chat messages" },
+		{ cmd:"copynames", args:null, desc:"Copies names of all clients to clipboard (Windows only)" },
+		{ cmd:"fakegun", args:null, desc:"Fakes first-person mode for strafing" },
+		{ cmd:"hud_reload", args:null, desc:"Reloads HUD files" },
+		{ cmd:"lua", args:"&lt;code here&gt;", desc:"Executes arbitrary Lua code. Use with caution." },
+		{ cmd:"lua_reload", args:null, desc:"Reloads the JPLua system and all plugins" },
+		{ cmd:"messageModeAll", args:null, desc:"Use new chatbox input for global messages (Requires cg_newChatbox 1)" },
+		{ cmd:"messageModeTeam", args:null, desc:"Use new chatbox input for team messages (Requires cg_newChatbox 1)" },
+		{ cmd:"messageModeTell", args:null, desc:"Use new chatbox input for private messages (Requires cg_newChatbox 1)" },
+		{ cmd:"pluginDisable", args:"&lt;0-12&gt;", desc:"Toggle various modification features" }
+	];
+
+	const adminCmds = [
+		{ cmd:"amban", args:"&lt;client&gt; &lt;duration&gt; [reason]", desc:"Ban a client with an optional reason" },
+		{ cmd:"ambanip", args:"&lt;ip&gt; &lt;duration&gt; [reason]", desc:"Ban an IP with optional reason" },
+		{ cmd:"amclip", args:null, desc:"Enter noclip mode" },
+		{ cmd:"amempower", args:"[client]", desc:"Give yourself or another client force powers" },
+		{ cmd:"amforceteam", args:"&lt;client&gt; &lt;team&gt;", desc:"Force a client to join the specified team" },
+		{ cmd:"amghost", args:"[client]", desc:"Ghost yourself or another client" },
+		{ cmd:"amkick", args:"&lt;client&gt;", desc:"Kick the specified client off the server" },
+		{ cmd:"amkillvote", args:null, desc:"Kill the current vote" },
+		{ cmd:"amlisttele", args:null, desc:"List named telemarks on the current map" },
+		{ cmd:"amlockteam", args:"&lt;team, -1&gt;", desc:"Prevent clients from joining a team" },
+		{ cmd:"amlogin", args:"&lt;username&gt; &lt;password&gt;", desc:"Login to an admin account" },
+		{ cmd:"amlogout", args:null, desc:"Log out of admin" },
+		{ cmd:"amluaexec", args:"&lt;code here&gt;", desc:"Execute a string as Lua code" },
+		{ cmd:"amluareload", args:null, desc:"Reload the JPLua system" },
+		{ cmd:"ammerc", args:"[client]", desc:"Give yourself or another client weapons" },
+		{ cmd:"amnpc", args:"&lt;spawn&gt; &lt;npcname&gt; [x y z]", desc:"Spawn an NPC" },
+		{ cmd:"ampoll", args:"&lt;question&gt;", desc:"Call a vote with a custom question" },
+		{ cmd:"amprotect", args:"[client]", desc:"Protect yourself or another client" },
+		{ cmd:"ampsay", args:"&lt;client, -1&gt; &lt;message&gt;", desc:"Send a message to the center of the screen of the specified client, or everyone" },
+		{ cmd:"amremap", args:"&lt;old shader&gt; &lt;new shader&gt;", desc:"" },
+		{ cmd:"amremovetele", args:"&lt;name&gt;", desc:"Remove a named telemark" },
+		{ cmd:"amrename", args:"&lt;client&gt; &lt;name&gt;", desc:"Rename a client" },
+		{ cmd:"amsavetele", args:null, desc:"Save named telemarks to disk" },
+		{ cmd:"amseetele", args:null, desc:"Visualise telemarks" },
+		{ cmd:"amsilence", args:"&lt;client&gt;", desc:"Disallow a client from talking" },
+		{ cmd:"amslap", args:"&lt;client&gt;", desc:"Slap and knockdown a client" },
+		{ cmd:"amslay", args:"&lt;client&gt;", desc:"Kill a client" },
+		{ cmd:"amsleep", args:"&lt;client, -1&gt;", desc:"Sleep another client or everyone" },
+		{ cmd:"amspawn", args:"&lt;classname&gt;", desc:"Spawn an entity" },
+		{ cmd:"amstatus", args:null, desc:"Show information on all players" },
+		{ cmd:"amtele", args:null, desc:"Teleport self to last marked location" },
+		{ cmd:"amtele", args:"&lt;client, telemark&gt;", desc:"Teleport self to another client, or named telemark" },
+		{ cmd:"amtele", args:"&lt;client&gt; &lt;client, telemark&gt;", desc:"Teleport a client to another client, or named telemark" },
+		{ cmd:"amtele", args:"&lt;x&gt; &lt;y&gt; &lt;z&gt;", desc:"Teleport self to specified coordinates" },
+		{ cmd:"amtele", args:"&lt;client&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; [yaw]", desc:"Teleport a client to specified coordinates" },
+		{ cmd:"amtelemark", args:"[name]", desc:"Create a named telemark, or a temporary telemark" },
+		{ cmd:"amunlockteam", args:"&lt;team, -1&gt;", desc:"Allow clients to join a team" },
+		{ cmd:"amunsilence", args:"&lt;client&gt;", desc:"Allow a client to talk after being silenced" },
+		{ cmd:"amunspawn", args:null, desc:"Remove a spawned entity" },
+		{ cmd:"amvstr", args:"&lt;cvar&gt;", desc:"Execute a Variable-STRing defined by the server" },
+		{ cmd:"amwake", args:"&lt;client, -1&gt;", desc:"Wake up a client or everyone" },
+		{ cmd:"amweather", args:"&lt;effect&gt;", desc:"Execute a weather command" },
+		{ cmd:"amwhois", args:null, desc:"Show who is logged into admin" },
+		{ cmd:"gunprotect", args:null, desc:"Protect the targeted client" },
+		{ cmd:"gunslap", args:null, desc:"Slap the targeted client" },
+		{ cmd:"gunsleep", args:null, desc:"Sleep or wake the targeted client" },
+		{ cmd:"gunspectate", args:null, desc:"Force the targeted client into the specatator team" },
+		{ cmd:"guntele", args:null, desc:"Teleport to your target" },
+		{ cmd:"guntelemark", args:null, desc:"Create a temporary telemark where your crosshair is" },
+		{ cmd:"guntelerev", args:null, desc:"Teleport the targeted client to yourself" }
+	];
+
+	const serverCmds = [
+		{ cmd:"adminadd", args:"&lt;user&gt; &lt;pass&gt; &lt;privileges&gt; &lt;login message&gt;", desc:"Adds an admin account" },
+		{ cmd:"admindel", args:"&lt;user&gt;", desc:"Deletes an admin account" },
+		{ cmd:"adminlist", args:null, desc:"Lists admin accounts" },
+		{ cmd:"adminreload", args:null, desc:"Reloading admin accounts from disk" },
+		{ cmd:"allready", args:null, desc:"Forces all players to be ready during warmup period" },
+		{ cmd:"banadd", args:"&lt;ip&gt; &lt;duration&gt; [reason]", desc:"Bans an IP" },
+		{ cmd:"bandel", args:"&lt;ip&gt;", desc:"Deletes an IP ban" },
+		{ cmd:"banlist", args:null, desc:"Lists banned IPs" },
+		{ cmd:"banreload", args:null, desc:"Reloads bans from disk" },
+		{ cmd:"cointoss", args:null, desc:"Flips a coin (heads/tails)" },
+		{ cmd:"gametype", args:null, desc:"Shows information on the current gametype" },
+		{ cmd:"lsmaps", args:null, desc:"Lists available maps for the current gametype" },
+		{ cmd:"lua_reload", args:null, desc:"Reloads the JPLua system and all plugins" },
+		{ cmd:"pause", args:null, desc:"Pauses/unpauses the match" },
+		{ cmd:"shuffle", args:null, desc:"Shuffles teams" },
+		{ cmd:"toggleuserinfovalidation", args:"&lt;0-31&gt;", desc:"Toggle various userinfo validation settings" },
+		{ cmd:"toggleAllowVote", args:"&lt;0-31&gt;", desc:"Toggle various g_allowVote settings" },
+	];
+
+	function min(x,y) { return x<y?x:y; }
+	function max(x,y) { return x>y?x:y; }
+
+	function writeCommand( commands, cmd ) {
+		if ( cmd < commands.length ) {
+			str = '<span class="cmd" title="' + commands[cmd].desc + '">' + commands[cmd].cmd;
+			if ( commands[cmd].args != null )
+				str += ' <span class="args">' + commands[cmd].args + '</span>';
+			str += '</span>';
+			document.write( str );
+		}
+	}
+
+	var len = max( gameCmds.length, clientCmds.length );
+	document.write( '<table class="fullwidth"><th width="50%">Game commands</th><th width="50%">Client commands</th>' );
+	for ( var cmd=0; cmd<len; cmd++ ) {
+		document.write( '<tr><td valign="top">' );
+		writeCommand( gameCmds, cmd );
+		document.write( '</td><td valign="top">' );
+		writeCommand( clientCmds, cmd );
+		document.write( '</td></tr>' );
+	}
+	document.write( "</table>" );
+
+	len = max( adminCmds.length, serverCmds.length );
+	document.write( '<table class="fullwidth"><th width="50%">Admin commands</th><th width="50%">Server commands</th>' );
+	for ( var cmd=0; cmd<len; cmd++ ) {
+		document.write( '<tr><td valign="top">' );
+		writeCommand( adminCmds, cmd );
+		document.write( '</td><td valign="top">' );
+		writeCommand( serverCmds, cmd );
+		document.write( '</td></tr>' );
+	}
+	document.write( "</table>" );
+
+	</script>
+</div>
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

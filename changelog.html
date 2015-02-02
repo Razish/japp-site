@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"/>
+<title>JA++ Changelog</title>
+<link href="styles.css" rel="stylesheet" />
+</head>
+<body onload="init_bar();">
+<h1>JA++ Changelog</h1>
+
+<hr />
+
+<div id="pagewrap">
+	<p>Earlier version information is not available.</p>
+
+	<div id="changelog">
+		<p>
+			[2011/09/02] 0.1e build 8
+			<ul>
+				<li>* Added server name and modification to the main scoreboard whilst spectating</li>
+				<li>* Added mini-scoreboard whilst spectating.</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/09/07] 0.1e build 9
+			<ul>
+				<li>* Timestamps now detect if the system clock is 12/24 hour format</li>
+				<li>* Fixed prediction errors for a bunch of emotes and special moves</li>
+				<li>* Fixed RGB settings being lost after using /sabercolor and changing userinfo (Longest standing bug in JA++ ^^)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/09/12] 0.1e build 10
+			<ul>
+				<li>* Changed the registry string used to detect timestamp format (12/24 hour) as Vista did not have the one I was using</li>
+				<li>* Fixed prediction errors for a bunch of emotes and special moves</li>
+				<li>* Fixed saber color being reverted after using /sabercolor whilst having a base colour</li>
+				<li>* Renamed /query to /japp_favsrv_query</li>
+				<li>* Players no longer get an odd glow around them after charging a pistol shot</li>
+				<li>* Saber blades are no longer invisible when using /cg_saberBladeStyle 1-5 and /cg_saberTrail 0</li>
+				<li>* Smart Entities no longer hides players when you're in water</li>
+				<li>* Scoping whilst taking damage to your shield will no longer constantly render your shield when you're scoped</li>
+				<li>* Bryar pistol no longer shows the wrong firing animation, unless on a base/JA+ server</li>
+				<li>* Spectating players whilst using True View will no longer leave their head invisible</li>
+				<li>* Connecting to an invalid hostname whilst ingame will no longer send you to a black screen</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/09/30] 0.1e build 11
+			<ul>
+				<li>* Fixed the timestamp format detection (12/24 hour) for optimised/final builds.</li>
+				<li>* Fixed grapple visualisation for servers with slow grapple</li>
+				<li>* Ingame profile customisation screen supports longer names</li>
+				<li>* Announcements are no longer truncated, a line-feed is inserted</li>
+				<li>* New chatbox line-wrapping improved, words won't be cut off</li>
+				<li>* Stray colour escapes ('^') will no longer break line wrapping with the new chatbox</li>
+				<li>* New saber blades (cg_saberBladeStyle) improved - no gap when rotating slowly</li>
+				<li>* Smart Entities won't hide players if you zoom in with the Disruptor</li>
+				<li>* Bryar pistol shooting animation fixed (again - was being corrected on JA+ servers)</li>
+				<li>* Removed some bad shield styles</li>
+				<li>* Force power selection no longer has weird bugs. Was a side effect of a syntax error I corrected.</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/10/04] 0.1e build 12
+			<ul>
+				<li>* Grapple swing prediction improved (Regression introduced in 0.1e build 11)</li>
+				<li>* amghost prediction improved when moving through clip brushes</li>
+				<li>* +grapple is now an alias for +button12</li>
+				<li>* Shields are visible on other players once again (Regression introduced in 0.1e build 10)</li>
+				<li>* Fixed a prediction error when switching weapon whilst in a melee grapple.</li>
+				<li>* Added prediction checks for all emotes listed in /aminfo</li>
+				<li>* Added /showPlayerID to list the client numbers of everyone connected.</li>
+				<li>* Added /pluginDisable to enable/disable certain features on JA+ servers. Not all are implemented.</li>
+				<li>* Melee animation can optionally be replaced by something with your hands by your side.</li>
+				<li>* Minor UI tweak, mini scoreboard name highlighting is aligned with the main background</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/10/06] 0.1e build 13
+			<ul>
+				<li>* Improved favourite server manager (WIP - /japp_favsrv_query)</li>
+				<li>* Improved amghost prediction - camera won't clip through invisible brushes you can walk through</li>
+				<li>* Added flamethrower visualisation for mercs.</li>
+				<li>* Added alternate dimension transparency</li>
+				<li>* Fixed absurd dynamic light issue with vehicles</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/10/17] 0.1e build 14
+			<ul>
+				<li>* Removed limitation on third person camera pitch (Was -80 &lt;-&gt; 80)</li>
+				<li>* Fixed saber trail length scalars for cg_saberBladeStyle 0</li>
+				<li>* Removed some saber visual styles (cg_saberBladeStyle)</li>
+				<li>* Fixed dynamic glow texture size not being saved</li>
+				<li>* Bypassed g_synchronousClients requirement to /record demos</li>
+				<li>* Added cvar to hide/show sabers of dueling playing (cg_showDuelSabers)</li>
+				<li>* List boxes (Server browser, model selection, saber selection) can now be scrolled through with the mouse wheel (Ideal stolen from Smod, sorry &lt;3!)</li>
+				<li>* Console can now be scrolled through with the mouse wheel</li>
+				<li>* Multiple choice buttons (Texture detail, etc) can now be scrolled through with the mouse wheel</li>
+				<li>* Optional speed trail when moving fast (Strafing) that changes colour with the speedometer (cg_strafeTrail)</li>
+				<li>* Improved /japp_favsrv_query</li>
+				<li>* Added menu for RGB saber selection</li>
+				<li>* Added a whole lot to the setup menu (custom resolution, dynamic glow, shadows, fast sky, etc)</li>
+				<li>* Added JA++ specific menus. SO MANY OPTIONS.</li>
+				<li>* Edit fields in menus no longer leave insert/overstrike mode on</li>
+				<li>* Entering something in the console without a preceding '/' or '\' will no longer send a chat command</li>
+				<li>* Fixed chat messages being 'delayed' after changing cg_chatLines</li>
+				<li>* Implemented scrolling through the new chatbox via mouse wheel or pgup/pgdn when you're chatting, or you can bind "scrollchat 0-1"</li>
+				<li>* Added hidden skins (reborn/boss, imperial/officer, etc) to the character selection screen</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/10/30] 0.1e build 15
+			<ul>
+				<li>* Forced a lower-limit on cg_hudChatW to avoid crashing</li>
+				<li>* Implemented JK2 style rolls based on jp_cinfo serverinfo bit-values: 2, 4, 8. Controlled by jp_fixRoll 0-2 server-side.</li>
+				<li>* Minor UI tweak to fix saber models spinning on the wrong axis in the out-of-game saber customisation menu. Regression introduced in 0.1e build 14</li>
+				<li>* Improved cp_login security</li>
+				<li>* Improved /japp_favsrv_query</li>
+				<li>* Implemented /japp_favsrv_add</li>
+				<li>* Implemented /japp_favsrv_list</li>
+				<li>* Favourite servers are now stored upon closing JA</li>
+				<li>* Ingame character selection menu now shows a preview of your selected model</li>
+				<li>* Closing the ingame saber selection menu now shows the character selection menu</li>
+				<li>* Spectators and bots are now clearly shown in the scoreboard</li>
+				<li>* Horizontal position of "Ready" on the post-game scoreboard has been fixed, it was off the screen for a few versions</li>
+				<li>* Reverted some changes to scoreboard text size and line height. 'Interleaved' scoreboard mode is small enough to fit 32 clients nicely.</li>
+				<li>* Flame and electric sabers now use basejka saber visual style even with non-zero cg_saberBladeStyle</li>
+				<li>* Ctrl-Backspace now clears the chat field</li>
+				<li>* Added functionality for future chatbox improvements, including tabbed chatbox for private messages. Likely to be a JA++ server exclusive feature due to JA+/basejka * limitations</li>
+				<li>* Added /togglewindowed to toggle the border on windowed mode display.</li>
+				<li>* cg_hudFiles 1 now uses the cg_hud*** cvars</li>
+				<li>* Lowered the number of lines shown on the basejka chatbox to match basejka (5, was 10)</li>
+				<li>* Added cg_hudChatBGB for the brightness of the chatbox background (0.0 &lt;-&gt; 1.0)</li>
+				<li>* Adjusted vertical position of the "killed by" message (Scoreboard will be redesigned in the future)</li>
+				<li>* Reverted WIP flipkick code to avoid an animation issue</li>
+				<li>* cg_saberTrail is now archived</li>
+				<li>* Put the third person camera pitch restriction back in due to buggy interpolation when moving fast.</li>
+				<li>* Grapple is now complete, apart from the hook model itself</li>
+			</ul>
+		</p>
+
+		<p>
+			[2011/11/18] 0.1e build 16
+			<ul>
+				<li>* Implemented tabbed chatbox, Ctrl-(shift-)tab or Ctrl-mousewheel to scroll through tabs. 'channels' and private messages will use their own tab on servers that support it.</li>
+				<li>* Implemented message notifications if you recieve a message on a tab you haven't selected</li>
+				<li>* Graphical HUD now displays proper armor value (i.e. when you have &gt; 100 armor)</li>
+				<li>* Implemented JK2 gametypes (For JA++ servers)</li>
+				<li>* Implemented movement key-press visualisation (cg_movementKeys - incomplete, won't work for demos or spectating)</li>
+				<li>* Added the ability to change the console prompt character (cg_consolePromptChar - default ']')</li>
+				<li>* Fixed third person mode being reset occasionally</li>
+				<li>* Changed sound when scrolling through the some list boxes (Server browser, character selection)</li>
+				<li>* Updated mouse position when scrolling through listbox items</li>
+				<li>* Altered random taunt selector code to consider the original taunt</li>
+				<li>* Implemented in-game server browser (Incomplete)</li>
+				<li>* Increased max chatbox entries to 512 (Was 128)</li>
+				<li>* Improved duel isolation for several events</li>
+				<li>* Modified scoreboard size again. Also removes chat whilst scoreboard is up.</li>
+				<li>* Fixed a prediction error after spectating somebody who is on a mover then switching to roaming mode</li>
+				<li>* Chat will no longer roll up if you have scrolled up</li>
+				<li>* Preliminary work on adding a cursor to the cgame key-catcher, for future use such as click-and-drag HUD editing, chatbox tab selection, scoreboard client interaction</li>
+				<li>* Implemented ledge-grab, needs tweaking</li>
+				<li>* Added a cvar to disable amghost prediction (cg_attemptGhostPredict)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2012/05/27] 0.2 build 1
+			<ul>
+				<li>* Improved ledge-grab engagement rules and movement speed inconsistencies</li>
+				<li>* Added the ability to change the RGBA of the protection bubble (e.g. /cg_bubbleR 255)</li>
+				<li>* Fixed a major vulnerability in serverinfo response packets that could crash clients who query the master server (I dub thee 'q3queryboom')</li>
+				<li>* Fixed a major vulnerability where a malicious server could redirect connect attempts (I dub thee 'q3connjack')</li>
+				<li>* Added support for chat filtering to differentiate between types of messages (specifically for JA++ servers)</li>
+				<li>* Added jappvideomode command to allow alt-tab from fullscreen and remove borders on windowed mode</li>
+				<li>* Removed Herobrine</li>
+				<li>* Implemented cl_master cvar to choose the master server queried to obtain a list of servers</li>
+				<li>* Implemented Lua scripting and plugin framework/API</li>
+				<li>* Unlocked 'viewlog' cvar</li>
+				<li>* Fixed camera position not updating if you fall down a hole and turn off cg_draw2D</li>
+				<li>* Removed left-over debug messages (movementDir)</li>
+				<li>* Fixed text drawn with a ^x colour code not fading consistently (Thanks to Sil)</li>
+				<li>* Obituary messages and default model are now affected by the player's gender even if you don't have their model</li>
+				<li>* Removed all references of "JA++" and "plugin" (See: forum announcement)</li>
+				<li>* Improved client/server support hinting, removed all version sniffing</li>
+				<li>* Disallowed invalid r_primitives values</li>
+				<li>* Various engine bugs fixed</li>
+				<li>* Added black sabers</li>
+				<li>* Modified strafe trails, added a second style</li>
+				<li>* Fixed an issue where head dismemberment would 'clone' the head mesh due to true-view controlling the visibility of that surface</li>
+				<li>* ???</li>
+			</ul>
+		</p>
+
+		<p>
+			[2012/06/07] 0.2 build 2
+			<ul>
+				<li>* Fixed a Com_Sprintf overflow warning message</li>
+				<li>* Fixed ^8 and ^9 not colouring text 'properly' in the console</li>
+				<li>* Added timestamps to console messages</li>
+				<li>* Added the option for timestamps to show the map time instead of local time</li>
+				<li>* Removed dynamic lights from black sabers</li>
+				<li>* Fixed a bug where your second saber colour was being reset if your first saber colour was RGB</li>
+				<li>* Improved the auto-map. I'm on a horse.</li>
+				<li>* Added skins that were hidden or missing icons to the character selection menu. Not finished, I need to finish removing vehicles and other non-humanoid models.</li>
+				<li>* Fixed potential crash issues with UU. UU is still not considered stable.</li>
+				<li>* Added an automatic updater. Disable with japp_autoUpdate 0</li>
+				<li>* Added a whole bunch of prediction improvements</li>
+				<li>* Replaced black saber artwork with custom artwork, and added them to the saber customisation menu</li>
+			</ul>
+		</p>
+
+		<p>
+			[2012/06/10] 0.2 build 3
+			<ul>
+				<li>* Minor fixes to the auto-updater</li>
+				<li>* Minor fixes to black sabers</li>
+				<li>* JPLua update, API docs posted on forums</li>
+				<li>* Improved console timestamps to retain horizontal position across line-feeds</li>
+				<li>* Added more saber customisation cvars for cg_saberBladeStyle 1</li>
+			</ul>
+		</p>
+
+		<p>
+			[2012/12/16] 0.3 build 1
+			<ul>
+				<li>* Certain textures (weapon icons, etc) will be loaded at native resolution disregarding r_picmip</li>
+				<li>* Removed clguntele. All similar commands will be implemented in Lua.</li>
+				<li>* Any post-processing errors will disable the post-processing pass to avoid console spam.</li>
+				<li>* Added a framework for rendering multiple views, akin to spectating multiple clients</li>
+				<li>* Unknown female skins now show as Jan instead of Kyle</li>
+				<li>* Drastically improved post-processing. More options for bloom, faster rendering, on-the-fly reloading.</li>
+				<li>* Fixed chat bubble not showing up if you're meditating.</li>
+				<li>* Added /mini command to minimise JA</li>
+				<li>* Renamed japp_favsrv_query to serverstatus once again.</li>
+				<li>* Removed cheat-protection from r_drawfog cvar</li>
+				<li>* Added mapname to scoreboard header</li>
+				<li>* Added an alternate scoreboard (cg_newScoreboard)</li>
+				<li>* Fixed various bugs in existing scoreboard such as spectators not showing in team games.</li>
+				<li>* 3 new fonts used in various places</li>
+				<li>* Improved movement keys HUD when spectating someone. Also shows crouching now.</li>
+				<li>* Added time to console</li>
+				<li>* Removed cheat protection on a bunch of cvars, and made them save.</li>
+				<li>* Improved duel isolation, items you can't pick up will be dim</li>
+				<li>* Added japp_disableEngineHooks cvar to not use engine modifications for compatibility reasons, specifically with UU. A value of -1 disables all engine modifications.</li>
+				<li>* Added strafe-helper from Smod (Credit to Sil)</li>
+				<li>* Looping sounds (Force rage, absorb, speed) now follow their owners properly (Credit to Sil)</li>
+				<li>* Fixed issue on map_restart where spectators were being rendered for a short time (Credit to Sil)</li>
+				<li>* When dueling, non-dueling players will be unable to intercept your private messages by walking in-front</li>
+				<li>* Added /fakegun to practice strafing in first person on weapon-disabled servers</li>
+				<li>* Renamed cg_stats to cg_statsHUD. Recommend typing /cg_stats 0 to avoid basejka behaviour (console spam)</li>
+				<li>* Crosshair names now fade properly (broken in basejka)</li>
+				<li>* cg_noTaunt is now functional (broken in basejka)</li>
+				<li>* Added cg_teamSabersRGB to control whether to see RGB sabers in team games (0 = use team colour, 1 = use RGB colour for other players, 2 = use RGB colour for everyone)</li>
+				<li>* Added cg_forceAllyModel and cg_forceEnemyModel which use cg_forceModel as a master switch</li>
+				<li>* Added cg_scorePlums 2 to show score plums when killing someone</li>
+				<li>* Various fixes and improvements to UI code</li>
+				<li>* Strafe trail no longer affects jetpack fuel on the HUD</li>
+				<li>* cg_drawFPS 2 shows frametime in fractional msec</li>
+				<li>* Colour codes no longer affect the chatbox width calculation which were splitting lines in half early</li>
+				<li>* Added r_autoMapAngle to control the orientation of the automap camera</li>
+				<li>* Added name tab-completion to the chatbox</li>
+				<li>* Fixed an issue regarding intermission not being properly detected.</li>
+				<li>* Added cg_forceSaber and cg_forceOwnSaber to override what saber you see yourself and other people using (VISUALLY ONLY)</li>
+				<li>* Fixed ingame server browser "Get server info" button</li>
+				<li>* Fixed basejka bug where vote strings were occasionally totally bogus. Also shows the votestring for unknown votes (e.g. ampoll, cointoss)</li>
+				<li>* Fixed basejka issues leading to text on the server browser being cut short</li>
+				<li>* Drastically improved "setup" menu</li>
+				<li>* Huge amount of security and stability fixes in basejka code</li>
+				<li>* Security issue regarding CVAR_SYSTEMINFO and fs_game directory traversal fixed</li>
+				<li>* Added support for multiple master servers, defined by sv_master1-5 incase masterjk3.ravensoft.com goes down (Credit to eezstreet + Ensiform)</li>
+				<li>* Temporarily removed the mini scoreboard</li>
+				<li>* Temporarily removed auto-updater. Still checks for new versions but does not download.</li>
+				<li>* Fixed poor JA+ SSF detection resulting in flamethrower not being used</li>
+				<li>* Fixed world coord -&gt; screen coord calculation on non-4:3 aspect ratios</li>
+				<li>* Added subdirectories to demo player menu</li>
+				<li>* Increased number of saber hilts loaded</li>
+				<li>* Added inline chatbox commands/cvars + completion, controlled by /cg_chatCompletion</li>
+				<li>* Added chat history, use arrows to scroll through recently sent messages</li>
+				<li>* Fixed first person shield bug</li>
+				<li>* Added cg_newFX bit-flag for various effect replacements (disintegration, disruptor fire, repeater alt-fire)</li>
+			</ul>
+		</p>
+
+		<p>
+			JPLua update v3
+			<ul>
+				<li>* In preparation for server-side lua, all client-side JPLua files now exist in GameData/japlus/cl/*</li>
+				<li>* Added cg_jplua cvar to enable/disable JPLua entirely.</li>
+				<li>* Fixed bug in JPLua loader that led to certain folder names being incorrect</li>
+				<li>* Removed player:GetGender() - all clientinfo is now a key/pair table from player:GetClientInfo()</li>
+				<li>* Added player:GetLocation() - returns a string of the nearest target_location entity according to the server.</li>
+				<li>* Modified JPLua global, it is now read-only and only contains an integer version number</li>
+				<li>* Added RayTrace(start, size, end, skipEntity, mask) for collision testing</li>
+				<li>* Added player:GetPosition(), player:GetAngles(), player:GetVelocity(), player:GetMaxAmmo([wp])</li>
+				<li>* Started adding JPMath library</li>
+				<li>* Added sanity checks to the Cvar API, shouldn't crash on non-existent cvars now</li>
+				<li>* Added Serialisation API. Experimental.</li>
+				<li>* Added JPLUA_EVENT_HUD listener, subsequently rewrote razhud and made it an optional plugin, not included in official releases</li>
+				<li>* Added JPLUA_EVENT_CHATMSGSEND listener, to read and modify outgoing chat messages (NOT /say)</li>
+				<li>* RegisterPlugin now accepts a third argument specifying the minimum JPLua version required</li>
+				<li>* Modified font library</li>
+				<li>* Added GetFPS, GetMapTime</li>
+			</ul>
+		</p>
+
+		<p>
+			[2013/03/30] 0.3 build 2
+			<ul>
+				<li>* Added cg_drawCrosshairNames 2 to fade crosshair names. 1 = basejka behaviour</li>
+				<li>* Fixed improper usage of cg_chatCompletion where any text preceded by '/' was being sent as a command, regardless of settings</li>
+				<li>* Fixed concussion rifle not having a barrel model</li>
+				<li>* Smooth first-person weapon animations</li>
+				<li>* Time limit warnings now play multiple times in a match if timelimit is changed</li>
+				<li>* Improved map load times.</li>
+				<li>* Added cg_drawTimer 2 to count down when a timelimit is set</li>
+				<li>* Added "simple flag" as cg_newFX bit-value 8</li>
+				<li>* Added cg_scoreboardSkinIcons to show players' skins on the basejka scoreboard (cg_newScoreboard 0)</li>
+				<li>* Map loading screen shows colours in names, and extended ASCII</li>
+				<li>* Chat logs now show extended ASCII</li>
+				<li>* Added say_team token replacement for health, armor, nearest pickup, recent pickup, nearest ally, current weapon, current time, location</li>
+				<li>* Modified cvar setting, quotes are no longer necessary for setting a cvar's value with spaces (e.g. /cg_bubbleColour r g b a)</li>
+				<li>* Added jetpack on/off prediction</li>
+				<li>* Added r_mapOverbrightBits from Q3</li>
+				<li>* Added ramp jumping to promode physics</li>
+				<li>* Added framerate-independent physics if server allows it (jp_cinfo &amp; 2097152)</li>
+				<li>* Added cg_forceAllyColour and cg_forceEnemyColour, specified in "R G B" between 0-255. A blank value will disable this.</li>
+				<li>* Fixed a case where cg_forceAllyModel/cg_forceEnemyModel was validating the skin based on teams.</li>
+				<li>* Added cg_autoRecordDemo, bit-value of gametypes to record demos in. File name formatted as such: 2013-03-25_22-15-20_CTF_mp-ctf4_Raz0r</li>
+			</ul>
+		</p>
+
+		<p>
+			[2013, August]
+			<ul>
+				<li>* Added bot_maxBots, bot_addDelay</li>
+				<li>* Added cg_fovViewModel</li>
+				<li>* Added japp_suicideDropFlag</li>
+				<li>* Fix jp_cinfo not being set correctly on new sessions</li>
+				<li>* Add replace_classname &lt;classname&gt;</li>
+				<li>* Fix forcenext/forceprev not working</li>
+				<li>* Improve OpenJK support, fix some math issues resulting in invalid wall-grab angles</li>
+				<li>* Added "holy shit" award</li>
+				<li>* Force client updates every g_forceClientUpdateRate msec</li>
+			</ul>
+		</p>
+
+		<p>
+			[2013, October]
+			<ul>
+				<li>* Added native Linux support to client</li>
+				<li>* Fix spawning vehicles crashing</li>
+				<li>* Fix saberonly/weapondisable/forcedisable icons not showing in server browser</li>
+				<li>* Fix spectating someone being disintegrated getting you stuck</li>
+				<li>* Improve cg_smoothClients for local player</li>
+			</ul>
+		</p>
+
+		<p>
+			[2013, December]
+			<ul>
+				<li>* Add JPLua ClientSpawn event</li>
+				<li>* Merged amfreeze and amunfreeze</li>
+				<li>* Added origin command</li>
+				<li>* Add ability to specify x/y/z when spawning NPCs</li>
+				<li>* Fix amtele not teleporting to previous telemark if no arguments are specified</li>
+				<li>* Added ammap admin command</li>
+				<li>* Make stun batons held by other clients audible</li>
+				<li>* amtelemark with no arguments creates a named telemark (default_PlayerName)</li>
+				<li>* Show userinfo string if a client fails validation</li>
+				<li>* Added /saber command</li>
+				<li>* Fix infostring corruption triggering userinfo validation</li>
+				<li>* Added duel isolation to server</li>
+				<li>* Optionally drain force points when empowered (japp_empowerDrain)</li>
+				<li>* Fix g_privateDuelHealth/g_privateDuelShield having no effect on the challenger</li>
+				<li>* Add japp_crashHandler to disable crash handler</li>
+				<li>* Fixed Jedi Master getting stuck in scope when picking up the saber</li>
+				<li>* Added more information to aminfo regarding saber settings</li>
+				<li>* Disallow grapple hook when attacking or dueling</li>
+				<li>* Added messageModeAll/messageModeTeam/messageModeWhisper to use new chatbox code, including tab-completion of player names</li>
+				<li>* Convert telemark file to JSON format.</li>
+				<li>* Added JK2/JA+ style flipkick</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, January]
+			<ul>
+				<li>* Fixed server hitch on spawns after very long uptime (due to framerate-independent force regen)</li>
+				<li>* Adjust forcepower validation</li>
+				<li>* Fixed NPC jumping not working on Linux</li>
+				<li>* Made flipkick and force lightning damage more consistent</li>
+				<li>* Fixed infinite weapon charge glitch</li>
+				<li>* Added japp_allowBusyAttack to prevent attacking when swapping weapons</li>
+				<li>* Fixed force regen bug with saber throw</li>
+				<li>* Fixed demo list memory corruption</li>
+				<li>* Added japp_slapDistance</li>
+				<li>* Added ui_showMissingSkins</li>
+				<li>* Fixed bots not attacking</li>
+				<li>* Fixed userinfo validation counting values as unique keys</li>
+				<li>* Fixed crucial game-breaking bug where /wrists was not producing the expected results.</li>
+				<li>* Added japp_improveYellowDFA to match JA+</li>
+				<li>* Added ability to disable special saber moves on server and client (japp_noKata, japp_noDFA, japp_noButterfly, japp_noStab or /pluginDisable)</li>
+				<li>* Added floating names above player heads when spectating</li>
+				<li>* Fixed saber lock crash</li>
+				<li>* Added ignore command</li>
+				<li>* Added amrename admin command</li>
+				<li>* Added amlockteam admin command</li>
+				<li>* Added more information to japp_version cvar</li>
+				<li>* Added japp_vq3physics for Quake 3 physics</li>
+				<li>* Fixed lua_reload reloading files from wrong directory</li>
+				<li>* Fixed crash logger using wrong version string in error</li>
+				<li>* Fixed aminfo crashing</li>
+				<li>* Fixed japp_promode not working on the first session</li>
+				<li>* Fixed chatbox not opening again after pressing escape</li>
+				<li>* Upgraded Lua to 5.2.3</li>
+				<li>* Added rank property to admin accounts (+ japp_passRankConflicts)</li>
+				<li>* Fixed crash in ClientDisconnect</li>
+				<li>* Log client renames</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, February]
+			<ul>
+				<li>* Added Lua&lt;-&gt;JSON serialiser for plugins</li>
+				<li>* Fixed DrawPic crashing</li>
+				<li>* Improve chatbox handling</li>
+				<li>* Added /team scoreboard support to client</li>
+				<li>* Move log file location, improve timestamps</li>
+				<li>* Added accurate loading bar to map load screen</li>
+				<li>* Added shield damage notifications to japp_damageNotifications</li>
+				<li>* Added ability to disable weapon pulling (japp_allowWeaponPull, default 1)</li>
+				<li>* Added g_forceRegenTimeDuel to control force power regeneration in private duels</li>
+				<li>* Fixed picmip being applied to more textures that didn't need it</li>
+				<li>* Merge some client and server JPLua functionality</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, March]
+			<ul>
+				<li>* Fixed bots triggering userinfo validation</li>
+				<li>* Fixed bots taking up client slots when failing connection</li>
+				<li>* Added version information to loading screen</li>
+				<li>* Reverted cvar defaults to match base</li>
+				<li>* Fixed japp_spawnWeaps not giving enough ammo</li>
+				<li>* Added japp_instagib</li>
+				<li>* Added japp_allowVoiceChat to allow voice chat in non-team gametypes</li>
+				<li>* Fixed amtele crashing</li>
+				<li>* Made client name matching (for admin commands, etc) case-insensitive</li>
+				<li>* Fixed several crashes when checking for admin permissions</li>
+				<li>* Added cg_crosshairColour, cg_crosshairLerp, cg_crosshairTint</li>
+				<li>* Fixed shader remapping</li>
+				<li>* Fixed JPLua plugin loading differing between Windows/Linux and inside/outside of PK3s</li>
+				<li>* Added emotes: amatease, amharlem</li>
+				<li>* Fixed some crashes in SP maps</li>
+				<li>* Added g_debugMelee 2 to match JA+</li>
+				<li>* Fixed JPLua cvars sometimes becoming corrupted</li>
+				<li>* Added japp_readyThreshold</li>
+				<li>* Fixed gunprotect not working</li>
+				<li>* Fixed ampoll being denied instantly</li>
+				<li>* Fixed bans not working - mask was being applied incorrectly, permanent bans were being treated as expired</li>
+				<li>* Fixed saber activation sound being played when saber hits a wall</li>
+				<li>* Fixed bandel removing all bans</li>
+				<li>+ Added date + version to scoreboard</li>
+				<li>* Fix cg_autoRecordDemo not using local time</li>
+				<li>+ Show more information in banlist command</li>
+				<li>* Fix viewmodel fov not being aspect-corrected</li>
+				<li>* Fix crash in scoreboard code</li>
+				<li>+ Made cg_simpleItems control the size of the icons</li>
+				<li>* Fixed some JPLua plugins being loaded twice</li>
+				<li>+ Allow amslay -1</li>
+				<li>* Fix executing admin commands on spectators</li>
+				<li>* Fix legacy grapple hook not working</li>
+				<li>* Fix shield not showing on other players when in first-person</li>
+				<li>* Don't show fullbody push blur when in first-person</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, April]
+			<ul>
+					<li>* Don't show client names when spectating if they're too far away</li>
+					<li>* Adjusted cvar defaults to match basejka</li>
+					<li>* Make all timestamps use local time</li>
+					<li>* Fix old scoreboard showing incorrect lines at the top</li>
+					<li>* Stop chat protection taking effect when in duels</li>
+					<li>* Disallow /saber command when dueling, saber is busy, or would fail due to userinfo spam</li>
+					<li>* Fix NPC jump heights</li>
+					<li>+ Show more maps in the menu listing</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, May]
+			<ul>
+				<li>* Fix some NPC scripts not executing</li>
+				<li>+ Don't open the profile menu when playing back a demo</li>
+				<li>* Fix screen tints (protect/absorb/lava/water) being far too opaque</li>
+				<li>+ Allow pasting text into menu fields</li>
+				<li>* Fixed teamtask validation denying newer OpenJK clients</li>
+				<li>+ Added japp_mercInfiniteAmmo</li>
+				<li>* Improve handling of gender for unknown models</li>
+				<li>+ Added logging to admin commands. Stored in logs/sv/admin.log</li>
+				<li>* Fix memory corruption with NPCs causing the server to randomly add bots</li>
+				<li>+ Add support for multiple master servers in the menu. Requires OpenJK</li>
+				<li>+ Add g_logItemPickup to log when an item is picked up, or avoid log spam</li>
+				<li>* Fix grapple showing up as white</li>
+				<li>* Fix grapple being deactivated when swinging saber. Still deactivates when performing a special move</li>
+				<li>+ Added check for duplicate names</li>
+				<li>* Fix flipkicks</li>
+				<li>+ Added /jetpack command and japp_allowJetpack cvar (bit-flag of gametypes that /jetpack is allowed in)</li>
+				<li>* Fix colour bleeding on FPS counter/map timer</li>
+				<li>* Improved forced enemy/ally models</li>
+				<li>+ Added new TDM scoreboard</li>
+				<li>* Fix cg_drawSpectatorNames interfering with crosshair targeting</li>
+				<li>* Fix "Following" text always showing up in spectator mode</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, June]
+			<ul>
+				<li>* Fix a crash on map load</li>
+				<li>+ Added SP-style cartwheel (japp_allowSPCartwheel / pluginDisable 13)</li>
+				<li>+ Added jp_gripSpeedScale</li>
+				<li>+ Added spawnvar support to amspawn command</li>
+				<li>+ Added japp_allowPushPullKnockdown</li>
+				<li>+ Allow comboing force absorb + protect with japp_allowForceCombo</li>
+				<li>+ Added japp_gripHolsterSaber to automatically holster saber when being gripped</li>
+				<li>* Don't show net on the scoreline in CTF/CTY gametypes</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, August]
+			<ul>
+				<li>+ Added g_debugTrace to visualise where unlagged traces occur</li>
+				<li>* Don't allow frozen players to kill themselves</li>
+				<li>* Fixed duplicate name checks breaking when reconnecting</li>
+				<li>+ Added a message to players getting slapped</li>
+				<li>* Adjust scoreboard spacing to accommodate for longer names</li>
+				<li>* Fix countdown map timer display when past timelimit</li>
+				<li>+ Made telemarks only visible to admins. Requires OpenJK server</li>
+				<li>* Fix falling to death not ending duels</li>
+				<li>* Improved entering/leaving emotes</li>
+				<li>* Add toggleAllowVote server command to tweak g_allowVote values</li>
+				<li>+ Scroll faster in listboxes when holding control</li>
+				<li>+ Added SP weather support</li>
+				<li>+ Added support for showing force-sight map surfaces</li>
+				<li>+ Added some SP NPCs</li>
+				<li>+ Added /pluginDisable option for basejka grapple</li>
+				<li>+ Added emotes: amaimgun, amatease, ambreakdance, amcower, amdance1-3, amfabulous, amharlem, amheal, amhello, amhips, amkneel, amneo, amnod, amradio, amshake, amshovel, amsmack1-2, amstepback, amsuggest, amsurrender, amwait</li>
+				<li>* Fix duel isolation regarding melee kicks and radius damage</li>
+				<li>* Fix chat protection regarding melee kicks and radius damage</li>
+				<li>* Split up japp_saberSystem 1 into japp_saberTweaks bit value</li>
+				<li>* Added chat protection for melee kicks</li>
+				<li>* Added duel isolation and chat protection for radius damage</li>
+				<li>* Only set gender once per frame</li>
+				<li>* Fixed crash regarding chat protection/duel isolation on non-player entities</li>
+				<li>* Adjusted saber damage during wind-up/return animations</li>
+				<li>* Added "free" team option for am(un)lockteam</li>
+				<li>+ Added japp_duelStats to show hp/armor, duration and number of hits</li>
+				<li>* Tweak saber blocking</li>
+				<li>* Improved /give command</li>
+				<li>* Fixed fast team switch exploit</li>
+				<li>* Remove grapple hook when slapped or frozen</li>
+				<li>* Fixed up some cg_smoothClients behaviour to help camera angles</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, September]
+			<ul>
+				<li>* Fixed ampsay -1 showing a warning</li>
+				<li>+ Added japp_spawnActivateSaber</li>
+				<li>+ Added say_team_mod with mode for team and admin chat</li>
+				<li>* Stop melee grapple affecting dueling players</li>
+				<li>+ Added error messages to player banning</li>
+				<li>* Fixed amsilence not working if the player switches teams</li>
+				<li>* Allow teleporting to higher-ranked admins</li>
+				<li>* Improved forcepowers validation, added more error messages</li>
+				<li>* Fix obscure bug in saber collision code where the blade position was not being reset properly</li>
+				<li>+ Added japp_saberBlockChance(Min/Max) to control the blocking chance.</li>
+				<li>* Fix team command always setting players to spectator, regression introduced by forcepowers improvements</li>
+				<li>+ Added amweather admin command</li>
+				<li>+ Added amkiss and amhug</li>
+				<li>* Fixed a server crash related to grapple</li>
+				<li>* Fixed teamed entities not working (e.g. paired doors opening together)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, October]
+			<ul>
+				<li>+ Added japp_saberBlockStanceParity to change the difference between stances for blocking chances</li>
+				<li>+ Added japp_saberBlockChanceScale to scale the overall chance of saber blocking</li>
+				<li>* Allow removing telemarks by ID</li>
+				<li>* Fix saber deflection when toggling second blade</li>
+				<li>* Rename japp_allowAnyGametype to japp_ammapAnyGametype</li>
+			</ul>
+		</p>
+	</div>
+</div>
+
+<script async src="http://assets.jkhub.org/bar/jkhub_bar.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+* {
+	tab-size: 4;
+}
+
+body {
+	background-image: url('bg.png');
+	font-family: "Arial", sans-serif;
+	font-size: 11pt;
+}
+
+div#pagewrap {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+a {
+	font-family: "Inconsolata", "Consolas", monospace;
+	color: blue;
+}
+
+a.download {
+	background-color: #007F00;
+	border-radius: 8px;
+	border: 4px solid lightgreen;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 24pt;
+	font-family: "Arial Black", serif;
+	color: #FFEEFF;
+	-webkit-text-fill-color: #FFEEFF;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: #222;
+	padding: 6px;
+	width: 400px;
+	margin: 0 auto;
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Arial Black", serif;
+	font-weight: normal;
+	margin: 0;
+}
+
+h2 {
+	font-size: 16pt;
+}
+h2::before { content: "$ "; }
+
+/* lists */
+ul { list-style-type: circle; margin: 6px; }
+ol { list-style-type: lower-roman; margin: 6px; }
+li { line-height: 14pt; }
+
+p {
+	margin-left: 40px;
+}
+
+table.fullwidth {
+	width: 100%;
+}
+
+/* terminal sessions */
+div.term {
+	font-family: "Inconsolata", "Consolas", monospace;
+	font-size: 12pt;
+	line-height: 18px;
+	background-color: rgba( 0, 0, 0, 0.75 );
+	color: #fff;
+	border: 2px solid rgba( 255, 255, 255, 0.5 );
+	border-radius: 4px;
+	padding: 4px;
+	white-space: pre;
+	margin-left: 16px;
+	display: inline-block;
+}
+div.term::selection {
+	color: #000;
+	background-color: #FF0;
+}
+
+span.code {
+	font-family: "Inconsolata", "Consolas", monospace;
+	padding: 0 2px;
+	border: 1px solid rgba( 0, 0, 0, 0.25 );
+	border-radius: 3px;
+	background-color: rgba( 255, 255, 255, 0.33333 );
+	font-size: 12pt;
+}
+
+/* main page */
+div#content table td {
+	vertical-align: top;
+}
+
+div#about {
+	font-size: 12pt;
+}
+
+/* cvars */
+table.cvars td {
+	padding: 0 0 8px 0;
+	vertical-align: top;
+}
+
+span.cvar {
+	font-family: "Inconsolata", "Consolas", monospace;
+	font-size: 12pt;
+}
+
+span.default, span.description {
+	font-size: 9pt;
+	color: #7F7F7F;
+	font-style: italic;
+}
+span.description {
+	padding: 0 0 0 16px;
+}
+
+/* commands */
+span.cmd {
+	font-weight: bold;
+}
+
+span.args {
+	font-weight: normal;
+	color: #7F7F7F;
+}
+
+/* calculator */
+input.calculator {
+	padding: 0 4px;
+	border: 1px solid rgba( 0, 0, 0, 0.25 );
+	border-radius: 3px;
+	font-family: "Inconsolata", "Consolas", monospace;
+	font-size: 12px;
+}
+
+/* download */
+input.button {
+	width: 96px;
+	text-align: center;
+	padding: 12px;
+	border: 1px solid #A0A0A0;
+	background-image: linear-gradient( #FFFFFF 0%, #F0F0F0 25%, #E7E7E7 75%, #DCDCDC 100% );
+}
+input.button:active {
+	background-image: linear-gradient( #DCDCDC 0%, #E7E7E7 25%, #F0F0F0 75%, #FFFFFF 100% );
+}
+input.button:hover {
+	border: 1px solid #606060;
+}
+
+/* changelog */
+div#changelog p {
+	margin: 0;
+	font-weight: bold;
+}
+div#changelog ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 1em 2em;
+}
+div#changelog li {
+	font-family: "Inconsolata", "Consolas", monospace;
+	font-size: 12pt;
+}
+
+/* jkhub bar */
+.jkhub-bar{position:absolute;top:0;left:0;width:100%;min-width:1000px;height:28px;border-bottom:1px solid rgba(0,0,0,0.5);font-family:Arial,Helvetica,sans-serif;font-size:12px;box-shadow:0 0 2px rgba(0,0,0,0.5);}.jkhub-bar img{border:none;}.jkhub-bar a:link,.jkhub-bar a:visited{text-decoration:none;text-shadow:none;}.jkhub-bar a:hover{text-decoration:underline;}#jkhub-inner{position:relative;width:960px;height:24px;margin:auto;background-color:transparent;}#jkhub-logo{float:left;margin:2px 6px 2px 0;}#jkhub-headline{float:left;display:inline-block;text-align:center;width:384px;border-style:inset;border-width:1px;height:20px;padding-top:0px;margin:3px 2px 2px 0;font-weight:bold;border-radius:17px;}#jkhub-prev-headline{display:block;float:left;font-size:25px;text-decoration:none;margin-right:2px;}#jkhub-next-headline{display:block;float:left;font-size:25px;text-decoration:none;margin-left:2px;}.jkhub-headline-buttons{float:left;margin-top:6px;}#jkhub-inner ul{margin:0;padding:0;list-style-type:none;}#jkhub-inner li:hover ul{opacity:1;display:block;}#jkhub-inner li:hover ul ul{display:none;}#jkhub-inner li li:hover ul{display:block;}#jkhub-inner ul a{display:inline-block;height:100%;width:90%;margin:0;padding:6px 0 0 0;text-decoration:none;width:100%;}.jkhub-categories{display:block;border-right-style:solid;border-right-width:1px;height:28px;text-align:right;}.jkhub-categories li{display:inline-block;height:22px;vertical-align:top;width:113px;margin-right:1px;}.jkhub-categories a{height:22px;border-left-style:solid;border-left-width:1px;text-align:center;text-shadow:0 1px 0 rgba(255,255,255,0.5);font-weight:bold;}.jkhub-categories a:hover{text-decoration:none;background-color:rgba(0,0,0,0.1);}.jkhub-menu{position:relative;text-align:left;width:100%;border-radius:0 0 6px 6px;opacity:0;transition:opacity 0.3s ease-out;display:none;z-index:9999;border-style:solid;border-width:1px;border-top:none;}.jkhub-menu li{display:block;height:16px;padding:3px 0 3px 0px;z-index:9999;}.jkhub-menu li:hover{background-color:rgba(0,0,0,0.1);}.jkhub-submenu{padding:0;}#jkhub-inner .jkhub-menu a{border-left:none;text-shadow:none;font-weight:normal;text-align:left;padding:0;font-size:8pt;width:92%;background:transparent;}.jkhub-submenu{position:relative;padding:4px 0;margin-top:1px;top:-1.5em;left:113px;border-radius:6px;border-style:solid;border-width:1px;}#jkhub-prev-headline,#jkhub-next-headline{margin-top:-1px;}.jkhub-bar{position:fixed;}.jkhub-bar,.jkhub-menu,.jkhub-submenu{background:#bdc3c7;}.jkhub-bar a:link,.jkhub-bar a:visited,.jkhub-bar,.jkhub-bar a:hover{color:#303030;font-family:sans-serif;}.jkhub-categories a,#jkhub-headline,.jkhub-categories,.jkhub-menu,.jkhub-submenu{border-color:rgba(0,0,0,0.15);}.jkhub-menu li:hover,.jkhub-categories a:hover{background-color:rgba(255,255,255,0.1);}#jkhub-next-headline,#jkhub-prev-headline{color:rgba(255,255,255,0.25);}div.paragraph ul,div.paragraph ol{padding-left:2.3em!important;margin:5px 0!important;overflow:hidden;}div.paragraph li{padding-left:5px!important;margin:3px 0 0!important;}div.paragraph ul,div.paragraph ul li{list-style:disc outside!important;}div.paragraph ol,div.paragraph ol li{list-style:decimal outside!important;}
