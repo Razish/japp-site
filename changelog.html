@@ -608,6 +608,167 @@
 				<li>* Allow removing telemarks by ID</li>
 				<li>* Fix saber deflection when toggling second blade</li>
 				<li>* Rename japp_allowAnyGametype to japp_ammapAnyGametype</li>
+				<li>+ Added japp_fixRoll like JA+'s jp_fixRoll</li>
+				<li>+ Added japp_hookDebouncer to delay shooting grapple hook for x milliseconds</li>
+				<li>* Replace amfreeze with amsleep (also amwake, gunfreeze, gunwake)</li>
+				<li>* Fix grapple hook release issue</li>
+				<li>* Fix infinite jetpack in duel exploit</li>
+				<li>* Fix vehicles tending toward angle 0</li>
+				<li>* Fix dual/staff saber collision box not being correct</li>
+				<li>+ Added japp_voteMapAnyGT</li>
+				<li>* Removed >= 8msec restrction on pmove_msec</li>
+				<li>* Fixed CPM physics double-jump height</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, November]
+			<ul>
+				<li>* Don't require a name userinfo field (japp_validateUserinfo), Padawan will be used automatically</li>
+				<li>+ Added support for JA+ style _holes.cfg reading for invisible walls</li>
+				<li>* Adjust wallrun behavior to match JA+</li>
+				<li>+ Added japp_itemPush to push items with force</li>
+				<li>+ Added feedback for admin banning (success/fail)</li>
+				<li>+ Admin logins persist across map change</li>
+				<li>* Rewrote session code to write to JSON files instead of cvars</li>
+				<li>+ japp_amrenameTime so renamed players can't rename for a specified time</li>
+				<li>* Fix some session code fixing team setting, spawn players in spectator team properly</li>
+				<li>+ Track the empowered, merced, silenced and slept state of clients across map changes</li>
+				<li>+ Added amentlist command</li>
+				<li>* Renamed amspawn/amunspawn to amentspawn/amentremove</li>
+				<li>+ Allowed amentremove to remove entities based on ID</li>
+				<li>* Fixed amsleep and emotes expiring</li>
+				<li>* Fixed amlisttele not showing anything after a certain amount of telemarks</li>
+				<li>+ Allow /ignore -1</li>
+				<li>* Rename japp_removeOldMines to japp_removeOldExplosives and optionally remove limit on detpacks</li>
+				<li>+ Added centerprint announcement for duel winner</li>
+				<li>* Allow changing saber when in air</li>
+				<li>+ Added amentremove -1 to remove all custom entities</li>
+				<li>* Preserve nextmap setting when ammap is used</li>
+				<li>* Print ampsay results to console, always relay to the sender</li>
+				<li>* Fix NPC targetname being broken some time ago</li>
+				<li>* Award point to other player if you self-kill after being attacked</li>
+				<li>+ Added say_team_mod centerprint</li>
+				<li>+ Allow line-breaks in ampsay (\n)</li>
+				<li>- Removed cg_attemptGhostPredict</li>
+				<li>+ Added japp_ghostTouchTriggers (default: 1) so ghosted players can activate doors and pick up items</li>
+				<li>+ Added japp_antiWallhack for experimental anti-wallhack code against mind trick/ghost, requires OpenJK dedicated server</li>
+			</ul>
+		</p>
+
+		<p>
+			[2014, December]
+			<ul>
+				<li>* Stop slept players being woken up by duel challenges</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, January]
+			<ul>
+				<li>+ Added emotes ambeg, amsit1, amsit2, amsit3, amsit4, amsit6, amkneel2, amstand</li>
+				<li>* Fixed Siege bug where cvar system was being exhausted causing fatal errors</li>
+				<li>* Fix duel end print being garbage</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, February]
+			<ul>
+				<li>* Fixed amweather clear</li>
+				<li>+ Added /playertint command to server</li>
+				<li>+ Added amremap</li>
+				<li>+ Added amgrant</li>
+				<li>+ Added protection from elevator glitches while in duel</li>
+				<li>+ Added japp_AllowWeaponWallRun</li>
+				<li>+ Added japp_instantForceSwitch</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, March]
+			<ul>
+				<li>+ Added japp_adminEffectType + japp_adminEffectDuration for admin login effects</li>
+				<li>+ Added japp_slayDismember</li>
+				<li>+ Added amgive to give weapons/force/ammo</li>
+				<li>* Fixed amslap waking players</li>
+				<li>* Fixed admin log leaking a file handle</li>
+				<li></li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, April]
+			<ul>
+				<li>+ Added japp_reserveEntitySlots so item pickups don't show the wrong icon</li>
+				<li>* Fix MD5 hashing not working</li>
+				<li>+ Added saber-tweak value for nerfing roll-stab</li>
+				<li></li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, May]
+			<ul>
+				<li>+ Added japp_duelActivateSaber</li>
+				<li>+ Added pluginDisable value to disallow annoying emotes (amkiss, amhug)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, July]
+			<ul>
+				<li>+ Added queue for centerprints</li>
+				<li>+ Added custom admin messages (strings.json)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, July]
+			<ul>
+				<li>+ Added queue for centerprints</li>
+				<li>+ Added custom admin messages (strings.json)</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, August]
+			<ul>
+				<li>+ Added emotes amhiltthrow1, amhiltthrow2, ambreakdance, ambreakdance2, amdie, amdie2, amfinishinghim, amnoisy, ampower, sleep, amvictory, amwon</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, September]
+			<ul>
+				<li>+ Added japp_ratioFix to adjust HUD elements for widescreen aspect ratio</li>
+				<li>+ Added cg_queueCenterprint</li>
+				<li>+ Added cg_drawScoresNet</li>
+				<li>* Improved cg_smoothClients for local player</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, October]
+			<ul>
+				<li>+ Added (c)g_jpluaAutoload to control which plugins to place (e.g. "0", "1", or "razhud mystats plugin3")</li>
+				<li>+ Added lua_disable, lua_enable, lua_list</li>
+				<li>* Fix Ghoul2 related crash that happened on some platforms</li>
+				<li>* Fixed retail jamp.exe support</li>
+				<li>* Fix some (Siege) voice chat bugs</li>
+				<li>+ Added clickable URLs to chatbox</li>
+				<li>+ Added japp_preciseFonts (requires OpenJK)</li>
+				<li>* Fixed widescreen aspect-ratio correction for most HUD elements</li>
+				<li>* Fix crash + exploit related to selected force powers with modified clients</li>
+			</ul>
+		</p>
+
+		<p>
+			[2015, November]
+			<ul>
+				<li>+ Added support for JA+ spin kicks (japp_allowSpinkicks on server)</li>
+				<li>+ Added japp_kickTrace (more accurate melee kick collisions)</li>
+				<li>+ Added more diagnostics to entspew (fatal error when >= 1022 entities spawned)</li>
 			</ul>
 		</p>
 	</div>
