@@ -33,17 +33,32 @@ function show( id ) {
 
 	<div id="win" style="display:none;">
 		<ol>
-			<li>Download and install <em>Visual Studio 2013 Community Edition</em>: <a href="http://www.visualstudio.com/">vs_community.exe</a> (untick optional components)</li>
+			<li>Download <a href="http://tdm-gcc.tdragon.net/">TDM-GCC-64</a> (TDM64 Bundle)</li>
 			<li>Download Python 2.7: <a href="https://www.python.org/ftp/python/2.7.8/python-2.7.8.msi">python-2.7.8.msi</a> (Enable <em>Install python.exe to Path</em>)</li>
-			<li>Download PyWin32 Extensions: <a href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download">pywin32-219.win32-py2.7.exe</a></li>
+			<li>(optional) Download PyWin32 Extensions: <a href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download">pywin32-219.win32-py2.7.exe</a></li>
 			<li>Download SCons: <a href="http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-setup.exe/download">scons-2.3.4-setup.exe</a> - don't change installation options</li>
 			<li>Add <span class="code">C:\Python27</span> and <span class="code">C:\Python27\Scripts</span> to your <span class="code">%PATH%</span> environment variable.</li>
 			<li>Download the JA++ code and unzip it: <a href="https://github.com/Razish/japp/archive/master.zip">japp_master.zip</a> (Or clone from <span class="code">https://github.com/Razish/japp.git</span>)</li>
-			<li>Open the solution file: <span class="code">japp_master/japp.sln</span></li>
-			<li>Select <em>Release</em> configuration (<a href="https://dl.dropboxusercontent.com/u/41352148/how2release.png">picture</a>)</li>
-			<li>Press F7 (Build Solution) to compile</li>
-			<li>Copy files from <span class="code">japp_master/*.dll</span> to <span class="code">GameData/japlus/*.dll</span>, zip them up and rename to <span class="code">cl_bins_win32.pk3</span></li>
+			<li>Open a terminal in the code directory (Shift + right click -> Open command window here)</li>
+			<li>Run scons <br />
+				<div class="term">> scons force32=1 no_sql=1</div> is what official builds use
+			</li>
+			<li>Copy files from <span class="code">japp_master/*.dll</span> to <span class="code">GameData/japlus/*.dll</span>, zip them up and rename to e.g. <span class="code">cl_bins_win32.pk3</span></li>
 		</ol>
+		<hr />
+		There are other options you can specify as arguments to <span class="code">scons</span>
+		<ul>
+			<li><span class="code">force32</span> 1 to build a 32-bit binary on a 64-bit machine</li>
+			<li><span class="code">debug</span> 1 to generate debug information, 2 to also optimise code</li>
+			<li><span class="code">no_sql</span> 1 to disable MySQL/SQLite support if you run into issues with it</li>
+			<li><span class="code">no_crashhandler</span> 1 to disable the crash handler/logger functionality</li>
+		</ul>
+		<hr />
+		Or the following environment variables:
+		<ul>
+			<li><span class="code">NO_SSE=1</span> to not generate SSE2 instructions - closer to basejka. This is used for official builds</li>
+			<li><span class="code">MORE_WARNINGS=1</span> to enable more compiler warnings</li>
+		</ul>
 	</div>
 
 	<div id="linux" style="display:none;">
@@ -66,6 +81,8 @@ $ lua package.lua</div><br />
 		<ul>
 			<li><span class="code">force32</span> 1 to build a 32-bit binary on a 64-bit machine</li>
 			<li><span class="code">debug</span> 1 to generate debug information, 2 to also optimise code</li>
+			<li><span class="code">no_sql</span> 1 to disable MySQL/SQLite support if you run into issues with it</li>
+			<li><span class="code">no_crashhandler</span> 1 to disable the crash handler/logger functionality</li>
 		</ul>
 		<hr />
 		Or the following environment variables:
