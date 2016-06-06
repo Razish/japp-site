@@ -189,6 +189,20 @@ function spoilershow() {
 			]
 		},
 
+		{ ln:"japp_saberTweaks", sn:"sabertweak", desc:"Saber tweaks", ashex:false,
+			bitvalues:[
+				{ disp:"SABERTWEAK_INTERPOLATE", def:false, desc:"use SP style interpolation, also fix various small issues" },
+				{ disp:"SABERTWEAK_PROLONGDAMAGE", def:false, desc:"allow damaging in wind-up and return animations" },
+				{ disp:"SABERTWEAK_POSDEFLECTION", def:false, desc:"calculate deflection based on position rather than animation" },
+				{ disp:"SABERTWEAK_SPECIALMOVEDMG", def:false, desc:"tweak damages for special moves" },
+				{ disp:"SABERTWEAK_TRACESIZE", def:false, desc:"use SP saber trace size or based off radius defined in .sab file" },
+				{ disp:"SABERTWEAK_REDUCEBLOCKS", def:false, desc:"reduce chance of blocking based on saber stance" },
+				{ disp:"SABERTWEAK_TWOBLADEDEFLECTFIX", def:false, desc:"fix deflection bug when toggling second saber" },
+				{ disp:"SABERTWEAK_NERFDMG", def:false, desc:"nerf moves like roll-stab" },
+				{ disp:"SABERTWEAK_NOTLOCATIONBASED", def:false, desc:"never use location based damage for sabers" }
+			]
+		},
+
 		{ ln:"japp_spawnWeaps", sn:"spawnweaps", desc:"Spawn with these weapons", ashex:false,
 			bitvalues:[
 				{ disp:"WP_NONE", def:false, desc:"None" },
