@@ -32,19 +32,30 @@ function show( id ) {
 	</div>
 
 	<div id="win" style="display:none;">
+		You will have to install some development tools to compile JA++, these are the tools used for official builds.
+		<ul>
+			<li><a href="http://tdm-gcc.tdragon.net/">TDM-GCC-64</a> (TDM64 Bundle)</li>
+			<li><a href="https://www.python.org/ftp/python/2.7.8/python-2.7.8.msi">Python 2.7</a>, enable &quot;Install python.exe to Path&quot;<br />
+			Make sure <span class="code">C:\Python27</span> and <span class="code">C:\Python27\Scripts</span> are in your <span class="code">%PATH%</span> environment variable.</li>
+			<li><a href="http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-setup.exe/download">SCons</a>, don't change installation options</li>
+			<li><a href="http://git-for-windows.github.io/">Git for Windows</a></li>
+		</ul>
+		<hr />
+		Now to grab the latest code and compile it
 		<ol>
-			<li>Download <a href="http://tdm-gcc.tdragon.net/">TDM-GCC-64</a> (TDM64 Bundle)</li>
-			<li>Download Python 2.7: <a href="https://www.python.org/ftp/python/2.7.8/python-2.7.8.msi">python-2.7.8.msi</a> (Enable <em>Install python.exe to Path</em>)</li>
-			<li>(optional) Download PyWin32 Extensions: <a href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download">pywin32-219.win32-py2.7.exe</a></li>
-			<li>Download SCons: <a href="http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-setup.exe/download">scons-2.3.4-setup.exe</a> - don't change installation options</li>
-			<li>Add <span class="code">C:\Python27</span> and <span class="code">C:\Python27\Scripts</span> to your <span class="code">%PATH%</span> environment variable.</li>
-			<li>Download the JA++ code and unzip it: <a href="https://github.com/Razish/japp/archive/master.zip">japp_master.zip</a> (Or clone from <span class="code">https://github.com/Razish/japp.git</span>)</li>
-			<li>Open a terminal in the code directory (Shift + right click -> Open command window here)</li>
-			<li>Run scons <br />
-				<div class="term">> scons force32=1 no_sql=1</div> is what official builds use
-			</li>
-			<li>Copy files from <span class="code">japp_master/*.dll</span> to <span class="code">GameData/japlus/*.dll</span>, zip them up and rename to e.g. <span class="code">cl_bins_win32.pk3</span></li>
+			<li>Navigate to whatever folder you want the code to be in (e.g. Desktop)</li>
+			<li>Right click -> Git Bash here</li>
+			<li>Download latest code<br />
+			<div class="term">$ git clone https://github.com/Razish/japp.git
+$ cd japp</div></li>
+			<li>Compile it<br />
+			<div class="term">$ scons.bat force32=1 no_sql=1</div><br />
+			This should produce <span class="code">cgamex86.dll</span>, <span class="code">jampgamex86.dll</span>, <span class="code">uix86.dll</span> in the current directory.</li>
+			<li>Create a .zip containing these files and rename to *.pk3</li>
+			<li>Copy the PK3 to GameData/japlus.</li>
 		</ol>
+		<hr />
+		If you wish to use MSVC with JA++, specify <span class="code">tools=default</span> as an argument to <span class="code">scons.bat</span>
 		<hr />
 		There are other options you can specify as arguments to <span class="code">scons</span>
 		<ul>
@@ -56,7 +67,7 @@ function show( id ) {
 		<hr />
 		Or the following environment variables:
 		<ul>
-			<li><span class="code">NO_SSE=1</span> to not generate SSE2 instructions - closer to basejka. This is used for official builds</li>
+			<li><span class="code">NO_SSE=1</span> to not generate SSE2 instructions - closer to basejka at the cost of performance. This is used for official builds</li>
 			<li><span class="code">MORE_WARNINGS=1</span> to enable more compiler warnings</li>
 		</ul>
 	</div>
